@@ -181,8 +181,6 @@
      ================================================================ */
   const nav = $('.nav');
   const speedEls = $$('[data-speed]');
-  const origins = $('#origins'), track = $('#track'), bar = $('#originsBar');
-  const originImg = $('.photo-panel img');
 
   function onScroll() {
     nav.classList.toggle('solid', scrollY > 30);
@@ -196,13 +194,6 @@
       el._py = y;
       el.style.translate = `0 ${y}px`;
     });
-    if (origins) {
-      const or = origins.getBoundingClientRect();
-      const p = clamp(-or.top / (or.height - vh), 0, 1);
-      track.style.transform = `translateX(${-p * (track.scrollWidth - track.clientWidth)}px)`;
-      if (bar) bar.style.transform = `scaleX(${p})`;
-      if (originImg) originImg.style.transform = `translateX(${-p * 12}%)`;
-    }
   }
   let ticking = false;
   addEventListener('scroll', () => {
@@ -211,6 +202,62 @@
     requestAnimationFrame(() => { onScroll(); ticking = false; });
   }, { passive: true });
   onScroll();
+
+  /* ---------- about: the origins row ----------
+     A plain horizontal scroller: trackpads and phones swipe it natively,
+     a mouse can drag it, the arrows step one card. It never holds the page. */
+  const track = $('#track');
+  if (track) {
+    const bar = $('#originsBar'), prev = $('#originsPrev'), next = $('#originsNext');
+    const panels = $$('.panel', track);
+    const sync = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      const p = max > 0 ? clamp(track.scrollLeft / max, 0, 1) : 1;
+      if (bar) bar.style.transform = `scaleX(${p})`;
+      if (prev) prev.disabled = track.scrollLeft < 4;
+      if (next) next.disabled = track.scrollLeft > max - 4;
+    };
+    const stepTo = dir => {
+      const pad = parseFloat(getComputedStyle(track).paddingLeft);
+      const x = track.scrollLeft + 4;
+      const lefts = panels.map(p => p.offsetLeft - pad);
+      const i = dir > 0 ? lefts.findIndex(l => l > x) : lefts.map(l => l < x - 8).lastIndexOf(true);
+      if (i >= 0) track.scrollTo({ left: lefts[i], behavior: reduced ? 'auto' : 'smooth' });
+    };
+    prev && prev.addEventListener('click', () => stepTo(-1));
+    next && next.addEventListener('click', () => stepTo(1));
+    track.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); stepTo(e.key === 'ArrowRight' ? 1 : -1); }
+    });
+    track.addEventListener('scroll', sync, { passive: true });
+    addEventListener('resize', sync);
+    sync();
+
+    // mouse drag (touch and trackpads already scroll natively)
+    let drag = null;
+    track.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      drag = { x: e.clientX, left: track.scrollLeft, moved: false };
+    });
+    addEventListener('pointermove', e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) < 5) return;
+      if (!drag.moved) { drag.moved = true; track.classList.add('dragging'); }
+      track.scrollLeft = drag.left - dx;
+    });
+    addEventListener('pointerup', () => {
+      if (!drag) return;
+      const moved = drag.moved;
+      drag = null;
+      if (!moved) return;
+      track.classList.remove('dragging');
+      // settle on the nearest card
+      const pad = parseFloat(getComputedStyle(track).paddingLeft);
+      const near = panels.map(p => p.offsetLeft - pad).reduce((a, b) => (Math.abs(b - track.scrollLeft) < Math.abs(a - track.scrollLeft) ? b : a));
+      track.scrollTo({ left: near, behavior: reduced ? 'auto' : 'smooth' });
+    });
+  }
 
   /* ---------- drag anything (prints, desk files) ---------- */
   let zTop = 10;

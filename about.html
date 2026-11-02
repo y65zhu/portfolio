@@ -98,7 +98,7 @@
   </div>
 </section>
 
-<!-- ============ ORIGINS (horizontal scroll) ============ -->
+<!-- ============ ORIGINS (swipeable row) ============ -->
 <section class="origins" id="origins">
   <div class="origins-sticky">
     <div class="origins-head">
@@ -106,9 +106,13 @@
         <p class="mono eyebrow">Where it started</p>
         <h2>I learned business before I knew it had a name.</h2>
       </div>
-      <div class="progress" aria-hidden="true"><i id="originsBar"></i></div>
+      <div class="origins-nav">
+        <div class="progress" aria-hidden="true"><i id="originsBar"></i></div>
+        <button class="arrow" id="originsPrev" aria-label="Previous card" disabled>←</button>
+        <button class="arrow" id="originsNext" aria-label="Next card">→</button>
+      </div>
     </div>
-    <div class="track" id="track">
+    <div class="track" id="track" tabindex="0" aria-label="Where it started — swipe or use the arrows">
       <article class="panel photo-panel">
         <div class="ph"><img src="beijing.jpg" alt="A temple courtyard in Beijing in late-afternoon light"></div>
         <span class="num mono">01 / Beijing</span>
