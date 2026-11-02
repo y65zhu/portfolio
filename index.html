@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Annora Zhu</title>
+  <meta name="description" content="Annora Zhu — marketing & product-minded designer and portrait photographer at the University of Waterloo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/danxingshu-subset.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="index.html"><span class="dx">朱</span><span class="name-en">Annora Zhu</span></a>
+  <ul class="tabs">
+    <li><a href="index.html" aria-current="page">Home</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="lens.html">Lens</a></li>
+  </ul>
+  <a class="btn" href="#hello">Say hi</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-copy" data-depth="-12">
+    <p class="mono kicker"><span class="dot"></span>Open to marketing &amp; product internships</p>
+    <h1>I listen for what people <em>don't</em> say.</h1>
+  </div>
+
+  <figure class="portrait" data-depth="18">
+    <canvas id="inkPortrait" role="img" aria-label="A portrait of Annora drawn in calligraphy characters. Your cursor acts as a camera lens that reveals the real photo."></canvas>
+    <figcaption class="mono">
+      <span>↖ Move your cursor — it's a viewfinder.</span>
+      <span class="legend">Drawn in <b class="dx">听</b> listen · <b class="dx">心</b> heart · <b class="dx">光</b> light · <b class="dx">人</b> people</span>
+    </figcaption>
+  </figure>
+
+  <p class="hero-note mono" data-depth="-6">Marketing &amp; product-minded designer. Global Business &amp; Digital Arts, University of Waterloo.</p>
+
+  <div class="scroll-cue mono">Scroll</div>
+</header>
+
+<section class="intro">
+  <div>
+    <p class="mono eyebrow">Hello</p>
+    <h2 class="reveal">I'm Annora — a marketer who listens first.</h2>
+  </div>
+  <div class="reveal">
+    <p class="lead">I grew up in my family's restaurant in Beijing, and I've been behind some kind of counter ever since. <strong>A restaurant, a dessert shop, a nail salon, a beauty clinic, an arcade, an e-commerce platform, an education company, a property management office</strong> — eight industries, eight kinds of customers, one lesson: people rarely say what they really want, but they'll tell you if you're honest with them.</p>
+    <p class="lead">Now I turn that into brands, campaigns and products at the University of Waterloo.</p>
+    <a class="link" href="about.html">The longer version →</a>
+  </div>
+</section>
+
+<section>
+  <p class="mono eyebrow">Look around</p>
+  <div class="doors">
+    <a class="door reveal" href="work.html">
+      <img src="assets/work/excel-gum.jpg" alt="" data-speed="-0.05">
+      <span class="arrow">→</span>
+      <div class="door-text"><span class="mono">01 · 11 projects</span><h3>Work</h3></div>
+    </a>
+    <a class="door reveal" href="about.html">
+      <img src="assets/img/beijing.jpg" alt="" data-speed="-0.05">
+      <span class="arrow">→</span>
+      <div class="door-text"><span class="mono">02 · Beijing → Waterloo</span><h3>About</h3></div>
+    </a>
+    <a class="door reveal" href="lens.html">
+      <img src="assets/img/lens-poker.jpg" alt="" data-speed="-0.05">
+      <span class="arrow">→</span>
+      <div class="door-text"><span class="mono">03 · Portraits on a CCD</span><h3>Lens</h3></div>
+    </a>
+  </div>
+</section>
+
+<footer class="footer" id="hello">
+  <div class="stamp-zone" id="stampZone">
+    <p class="mono eyebrow">Say hi</p>
+    <h2>If you read this far, we'd probably get along.</h2>
+    <div class="links">
+      <a href="mailto:y65zhu@uwaterloo.ca">y65zhu@uwaterloo.ca</a>
+      <a href="https://www.linkedin.com/in/annora-zhu-1355352b9">LinkedIn ↗</a>
+      <a href="https://www.instagram.com/zz_annora">Instagram ↗</a>
+    </div>
+    <div class="signature">
+      <span class="sig dx">朱硯潤</span>
+      <span class="seal dx" aria-hidden="true">硯潤</span>
+      <span class="mono sig-note">My name, signed. A seal is how you sign a painting.</span>
+    </div>
+    <p class="mono stamp-hint" id="stampHint">Click anywhere in here to leave your own seal.</p>
+  </div>
+  <div class="fine mono"><span>© 2026 Annora Zhu</span><span>Hand-coded in Waterloo</span></div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
