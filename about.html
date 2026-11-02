@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="preload" href="assets/fonts/danxingshu-subset.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="danxingshu-subset.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -27,7 +27,7 @@
 <!-- ============ INTRO ============ -->
 <section class="about-hero">
   <figure class="about-photo reveal">
-    <img src="assets/img/me-crop.jpg" alt="Annora framing a shot with her camera on a sunny street">
+    <img src="me-crop.jpg" alt="Annora framing a shot with her camera on a sunny street">
     <figcaption class="mono">Usually on the other side of the lens.</figcaption>
   </figure>
   <div class="about-text">
@@ -110,25 +110,25 @@
     </div>
     <div class="track" id="track">
       <article class="panel photo-panel">
-        <div class="ph"><img src="assets/img/beijing.jpg" alt="A temple courtyard in Beijing in late-afternoon light"></div>
+        <div class="ph"><img src="beijing.jpg" alt="A temple courtyard in Beijing in late-afternoon light"></div>
         <span class="num mono">01 / Beijing</span>
         <h3>Behind the counter.</h3>
         <p>My family ran a restaurant and I helped watch the floor. You learn fast who wants to chat, who wants to be left alone, and who'll come back.</p>
       </article>
       <article class="panel">
-        <span class="big-glyph dx" aria-hidden="true">人</span>
+        <div class="panel-ink" data-ink="landscape" data-seed="21" data-sun="off" aria-hidden="true"></div>
         <span class="num mono">02 / Boarding school</span>
         <h3>Always a roommate.</h3>
         <p>Years of living with other people taught me to read a room — and how to share one.</p>
       </article>
       <article class="panel">
-        <span class="big-glyph dx" aria-hidden="true">心</span>
+        <div class="panel-ink" data-ink="landscape" data-seed="34" data-sun="off" aria-hidden="true"></div>
         <span class="num mono">03 / Canada</span>
         <h3>On my own.</h3>
         <p>I moved here by myself for high school and learned to take care of — and stand up for — myself.</p>
       </article>
       <article class="panel">
-        <span class="big-glyph dx red" aria-hidden="true">光</span>
+        <div class="panel-ink" data-ink="landscape" data-seed="45" data-sun="78,24" aria-hidden="true"></div>
         <span class="num mono">04 / Waterloo</span>
         <h3>Business, meet art.</h3>
         <p>Global Business &amp; Digital Arts was the only program I'd ever seen that put the two things I'm good at in the same room.</p>
@@ -160,7 +160,7 @@
   <div class="rug-stage" id="rugStage">
     <div class="desk" id="desk">
       <button class="file" style="--x:5%;--y:8%" data-title="advice-taken.log" data-body="My friends say I'm the most coachable person they know. Give me good feedback and I'll put my ego aside and act on it — usually the same day."><span class="ico star">✦</span><span class="fname">advice-taken.log</span></button>
-      <button class="file" style="--x:28%;--y:4%" data-title="nail-set-v12.jpg" data-body="I do nails. Ten tiny canvases, no undo button." data-img="assets/img/nails.jpg"><span class="ico ico-img" style="background-image:url(assets/img/nails.jpg)"></span><span class="fname">nail-set-v12.jpg</span></button>
+      <button class="file" style="--x:28%;--y:4%" data-title="nail-set-v12.jpg" data-body="I do nails. Ten tiny canvases, no undo button." data-img="nails.jpg"><span class="ico ico-img" style="background-image:url(nails.jpg)"></span><span class="fname">nail-set-v12.jpg</span></button>
       <button class="file" style="--x:52%;--y:12%" data-title="hello-kitty/" data-body="Lifelong, unapologetic fan. My room is mostly her at this point. (This folder is 4.2 GB.)"><span class="ico ico-folder"></span><span class="fname">hello-kitty/</span></button>
       <button class="file" style="--x:76%;--y:6%" data-title="still-can-do-the-splits.mov" data-body="Years of Chinese folk dance, since I was a kid. Yes — I can still do the splits."><span class="ico">▶</span><span class="fname">still-can-do-the-splits.mov</span></button>
       <button class="file" style="--x:12%;--y:50%" data-title="ink-practice.jpg" data-body="Years of Chinese calligraphy and ink painting. I still practice — it's where all the white space on this site comes from."><span class="ico ico-ink dx">墨</span><span class="fname">ink-practice.jpg</span></button>
@@ -177,9 +177,10 @@
     </div>
 
     <div class="cover-sheet" id="cover">
+      <div class="cover-ink" data-ink="landscape" data-seed="7" data-water aria-hidden="true"></div>
       <div class="cover-inner">
-        <span class="cover-glyph dx" aria-hidden="true">心</span>
-        <p class="mono">Nothing to see here.</p>
+        <p class="cover-title">My name, painted.</p>
+        <p class="cover-text">Stone for Yàn (an inkstone), water for Rùn (to nourish), and a vermilion sun for Zhū. Nothing else to see here… probably.</p>
       </div>
       <p class="cover-hint mono">Grab the corner &amp; peel ↘</p>
     </div>
@@ -198,16 +199,17 @@
       <a href="https://www.linkedin.com/in/annora-zhu-1355352b9">LinkedIn ↗</a>
       <a href="https://www.instagram.com/zz_annora">Instagram ↗</a>
     </div>
-    <div class="signature">
-      <span class="sig dx">朱硯潤</span>
-      <span class="seal dx" aria-hidden="true">硯潤</span>
-      <span class="mono sig-note">My name, signed. A seal is how you sign a painting.</span>
-    </div>
+    <figure class="signature">
+      <div class="sig-row"><span class="sig dx">朱硯潤</span><span class="sig-seal" data-seal="96"></span></div>
+      <figcaption><span class="mono sig-roman">ZHŪ YÀNRÙN</span><span class="sig-note">My name, signed and sealed — the way a painter finishes a painting.</span></figcaption>
+    </figure>
     <p class="mono stamp-hint" id="stampHint">Click anywhere in here to leave your own seal.</p>
   </div>
+  <div class="footer-ink" data-ink="ridge" data-seed="12" aria-hidden="true"></div>
   <div class="fine mono"><span>© 2026 Annora Zhu</span><span>Hand-coded in Waterloo</span></div>
 </footer>
 
 <script src="main.js"></script>
+<script src="ink.js"></script>
 </body>
 </html>

@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react"
 import { addPropertyControls, ControlType } from "framer"
-import { loadDanXing, INK, ZHU, PAPER } from "./Assets.tsx"
+import { useSiteFonts } from "./HomeHero.tsx"
+import { INK, ZHU, PAPER } from "./Assets.tsx"
+import InkScape from "./InkScape.tsx"
 
 /**
- * A sheet of paper covering whatever you connect to "Underneath".
+ * A sheet of paper covering whatever you connect to "Underneath". The sheet
+ * carries the site's ink painting — the name 朱硯潤 as a landscape.
  * Grab the bottom-right corner and peel it back; release past halfway and
  * it peels off. The fold line is the perpendicular bisector between the
  * corner and the pointer; whatever's past it is reflected into the flap.
@@ -12,15 +15,15 @@ import { loadDanXing, INK, ZHU, PAPER } from "./Assets.tsx"
  * @framerSupportedLayoutHeight fixed
  */
 export default function PeelReveal(props) {
-    const { underneath, glyph, caption, hint, resetLabel, paper } = props
+    const { underneath, title, caption, hint, resetLabel, paper, seed } = props
     const stageRef = useRef<HTMLDivElement>(null)
     const coverRef = useRef<HTMLDivElement>(null)
     const flapRef = useRef<HTMLDivElement>(null)
     const [peeled, setPeeled] = useState(false)
     const api = useRef<{ putBack?: () => void }>({})
+    useSiteFonts()
 
     useEffect(() => {
-        loadDanXing()
         const stage = stageRef.current, cover = coverRef.current, flap = flapRef.current
         if (!stage) return
         const clamp = (v, a, b) => Math.min(b, Math.max(a, v))
@@ -143,11 +146,14 @@ export default function PeelReveal(props) {
                     border: "1px solid #d3c8b6", borderRadius: 4, userSelect: "none",
                 }}
             >
-                <div style={{ textAlign: "center", color: "#8f857a" }}>
-                    <span style={{ display: "block", font: "220px/1 DanXing, serif", color: INK, opacity: 0.85 }}>{glyph}</span>
-                    <span style={{ font: '12px "IBM Plex Mono", monospace' }}>{caption}</span>
+                <div style={{ position: "absolute", inset: 0, overflow: "hidden", borderRadius: 4 }}>
+                    <InkScape {...(InkScape as any).defaultProps} seed={seed} />
                 </div>
-                <span style={{ position: "absolute", right: 26, bottom: 22, font: '12px "IBM Plex Mono", monospace', color: ZHU }}>{hint}</span>
+                <div style={{ position: "absolute", left: 32, top: 30, maxWidth: 380 }}>
+                    <span style={{ display: "block", font: "400 28px/1.1 Fraunces, serif", color: INK }}>{title}</span>
+                    <span style={{ display: "block", marginTop: 10, font: "300 15px/1.55 Inter, sans-serif", color: "#5a524a" }}>{caption}</span>
+                </div>
+                <span style={{ position: "absolute", right: 30, bottom: 26, font: '500 13px "IBM Plex Mono", monospace', color: ZHU }}>{hint}</span>
             </div>
             <div style={{ position: "absolute", inset: 0, zIndex: 6, pointerEvents: "none", display: peeled ? "none" : "block", filter: "drop-shadow(-6px -6px 10px rgba(35,31,28,.28))" }}>
                 <div ref={flapRef} style={{ position: "absolute", left: "-100%", top: "-100%", width: "300%", height: "300%" }} />
@@ -166,7 +172,7 @@ export default function PeelReveal(props) {
                     style={{
                         position: "absolute", left: "50%", bottom: -40, transform: "translateX(-50%)",
                         background: "none", border: 0, borderBottom: "1px solid #d3c8b6", color: "#8f857a",
-                        font: '12px "IBM Plex Mono", monospace', cursor: "pointer",
+                        font: '13px "IBM Plex Mono", monospace', cursor: "pointer",
                     }}
                 >
                     {resetLabel}
@@ -177,8 +183,9 @@ export default function PeelReveal(props) {
 }
 
 PeelReveal.defaultProps = {
-    glyph: "心",
-    caption: "Nothing to see here.",
+    title: "My name, painted.",
+    caption: "Stone for Yàn (an inkstone), water for Rùn (to nourish), and a vermilion sun for Zhū. Nothing else to see here… probably.",
+    seed: 7,
     hint: "Grab the corner & peel ↘",
     resetLabel: "Sweep it back under the rug ↺",
     paper: PAPER,
@@ -186,8 +193,9 @@ PeelReveal.defaultProps = {
 
 addPropertyControls(PeelReveal, {
     underneath: { type: ControlType.ComponentInstance, title: "Underneath" },
-    glyph: { type: ControlType.String, title: "Glyph" },
-    caption: { type: ControlType.String },
+    title: { type: ControlType.String },
+    caption: { type: ControlType.String, displayTextArea: true },
+    seed: { type: ControlType.Number, title: "Painting seed", min: 1, max: 999, step: 1, displayStepper: true },
     hint: { type: ControlType.String },
     resetLabel: { type: ControlType.String, title: "Reset label" },
     paper: { type: ControlType.Color },

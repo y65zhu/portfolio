@@ -34,12 +34,28 @@
 
 ## 1. 导入代码组件
 
-Assets → Code → **+** → New Code File，按下面顺序建文件，**文件名要一模一样**，把对应 `.tsx` 的内容整个粘进去：
+Assets → Code → **+** → New Code File。**文件名要和下表完全一致**，把对应 `.tsx` 的内容整个粘进去。按顺序建，因为后面的文件会 import 前面的：
 
-1. `Assets` ← `Assets.tsx`（**必须第一个建**，其他文件都会 import 它）
-2. `InkPortrait` · `ProjectDeck` · `PeelReveal` · `DeskFiles` · `DraggablePrints` · `SealStamp` · `CountUp`
+| 顺序 | 文件 | 用在哪 |
+|---|---|---|
+| 1 | `Assets` | 共享字体和颜色，其他文件都要用 |
+| 2 | `InkScape` | **全站的水墨画**：用朱硯潤画成的山水，石头代表硯，水代表潤，朱红太阳代表朱 |
+| 3 | `InkPortrait` | 首屏的文字人像 |
+| 4 | `HomeHero` | **首页首屏整段** |
+| 5 | `SiteFooter` | **页脚整段**，包括横排签名、隶书印章、点击盖章 |
+| 6 | `Doors` | 首页三扇门 |
+| 7 | `AboutHero` | **About 页开头整段** |
+| 8 | `OriginsScroll` | About 页横向滚动的成长经历 |
+| 9 | `PeelReveal` · `DeskFiles` | Off the clock：掀开水墨画看桌面 |
+| 10 | `ProjectDeck` | Work 页叠卡 |
+| 11 | `DraggablePrints` · `CountUp` · `SealStamp` | Lens 照片、数字滚动、旧版盖章（已被 SiteFooter 取代） |
 
-之后在 Assets → Code 里就能把它们拖到画布上，右侧面板可以改属性。
+**整段组件**（HomeHero、Doors、AboutHero、OriginsScroll、SiteFooter）的用法都一样：
+1. 拖到页面上；
+2. **Width 设为 Fill，Height 设为 Auto（Fit）**；
+3. 外面不要再套 Stack 或加 padding，留白、最大宽度和手机布局都由组件自己处理。
+
+照片默认读取 GitHub 上的图（`me-crop.jpg`、`beijing.jpg` 等），不用上传；想换图就在右侧面板上传。
 
 ## 2. 导航（一个 Component，4 个 Variant）
 
@@ -51,16 +67,14 @@ Assets → Code → **+** → New Code File，按下面顺序建文件，**文�
 
 ## 3. Home
 
-- **Hero**（三栏 Grid，高 100vh）：
-  - 左：小绿点那行（mono），加上 H1 "I listen for what people *don't* say."。其中 *don't* 用 Fraunces Italic、颜色 Zhu。
-  - 中：拖一个 **InkPortrait**，宽 520、高 693（3:4）。Photo 选 `assets/img/me-crop.jpg`，**Built-in matte 保持开启**（这个遮罩只对这张照片准，换照片就关掉）。下面两行说明文字。
-  - 右下：mono 小字简介。
-  - 视差：左右两块加 **Effects → Scroll Speed** 0.9 / 1.1。
-- **Intro**：两栏，文案照抄 `index.html` 里的 `.intro`。
-- **三扇门**：3 张 4:5 的卡，各自 Link 到 Work / About / Lens。
-  - 图片加 Hover 效果：Scale 1.06、Opacity 0.5。
-  - 右上角的圆形箭头 Hover 时旋转 -45°、变成 Zhu 色。
-- **Footer**：见第 7 节。
+从上到下只放四块，全部 Width = Fill：
+
+1. **HomeHero**：左边是标题和简介，右边是 3:4 的文字人像，人像下面是说明文字，背后衬一道淡淡的水墨山。手机上自动改成上下排。
+2. **Intro**：原生做，两栏 Grid（左 5 份 / 右 7 份）。左边放 Eyebrow 加 H2，右边放两段 Lead（Fraunces 22，行宽最多 640）和链接。文案照抄 `index.html` 的 `.intro`。
+3. **Doors**：三张 4:5 的卡排成一行，手机上排成一列。
+4. **SiteFooter**。
+
+段与段之间的间距统一 140（手机 96）。
 
 ## 4. Work
 
@@ -74,7 +88,10 @@ Assets → Code → **+** → New Code File，按下面顺序建文件，**文�
    | Embed Is Phone | Toggle |
 
    CSV 最后一列写着哪些图要从 `assets/work/` 手动上传（Biblely、WaterlooWorks、宣传册等，这些图旧网站上没有公开网址）。导入后可以删掉这一列。
-2. **列表页 /work**：拖一个 **ProjectDeck**，宽 Fill、高 620。默认已经填好 11 个项目，链接都指向 `/work/<slug>`，和 CMS 的 slug 对应。没有封面的项目：
+2. **列表页 /work**：拖一个 **ProjectDeck**，宽 Fill、高 620。默认已经填好 11 个项目，链接都指向 `/work/<slug>`，和 CMS 的 slug 对应。
+   - 新项目 DoFocus、Biblely、AI Certificate 排在中间，进页面时 DoFocus 默认翘起。想换成别的，改右侧的 **Raised at rest**（从 0 开始数）。
+   - 鼠标从左往右扫会一张一张地切换；触控板左右轻扫一下只走一张；键盘左右键也能切换。
+   - 没有封面的项目：
    - 在属性面板里给它上传 Cover，用 `assets/work/` 里的图；
    - 或者留空，它会自动显示成黑底文字卡。
 3. **详情页模板 /work/:slug**：照 `work.js` 的 detail 结构排。
@@ -87,27 +104,23 @@ Assets → Code → **+** → New Code File，按下面顺序建文件，**文�
 
 ## 5. About
 
-- **介绍**：左边竖版照片（`me-crop.jpg`），Position **Sticky** Top 100；右边 H1 "Hi, I'm Annora." 加四段 Lead，文案照抄 `about.html`。
-  - 三格数字用 **CountUp**：8、5、30（suffix 分别为空、空、"+"）。
-- **8 个工牌**：做一个 `Badge` 组件，结构是红色顶条 "HELLO, I'M / *Annora*"、中间写工作地点 + 小字、底部一个小孔，上方一条 1.5px 的挂绳。
-  - 加 **Effects → Loop**：Rotate -2.5° ↔ 2.5°，5s，Mirror。8 个工牌的 Delay 依次错开 0.6s。
-  - Hover：y 8、Scale 1.05。
-  - 整排上方放一条 2px 的黑线，旋转 -0.4°。
-- **5 顶帽子 + 3 条特质**：普通 Stack 就行；帽子 Hover 变黑底并上移 3。
-- **名字翻牌**：做一个 `NameCard` 组件，两个 Variant：Front（行书字 + 拼音）和 Back（黑底，英文意思）。
-  - Hover → Back，转场用 Spring；Back 的 Rotate Y 设 180°。
-  - 父级开 3D 透视（Perspective 1000），两面都关掉 Backface。
-  - 三张卡分别是：朱 *Vermilion* / 硯 *Inkstone* / 潤 *To nourish*。
-- **横向滚动的成长经历**：
-  1. 外层 Section 高 **340vh**；
-  2. 里面放一个 **Sticky**（Top 0）、高 100vh 的 Frame，Overflow Hidden；
-  3. 4 张卡排成横向 Stack（Track），Track 加 **Effects → Scroll Transform**，Trigger 设为外层 Section，滚动进度 0% → 100% 时 X 从 0 移到 -(Track 宽 − 视口宽)；
-  4. 再加一条 2px 的 Zhu 色进度条，同样用 Scroll Transform 控制 Scale X 0 → 1。
-  - Tablet / Phone 断点改成竖排，取消 Sticky。
-- **评语**：两张卡，Rotate 分别为 -1.2° 和 1°，Hover 时转回 0°。
-- **Off the clock**：
-  1. 先拖一个 **DeskFiles**（宽 1296、高 640）到画布空白处，在属性面板给 `nail-set-v12.jpg` 上传 `assets/img/nails.jpg`；
-  2. 再拖一个 **PeelReveal**，大小相同，把它的 **Underneath** 连到刚才那个 DeskFiles。
+从上到下：
+
+1. **AboutHero**：左边是 3:4 的照片，滚动时固定不动；右边是标题、四段文字和三格会滚动的数字。要加粗的词用 `**` 包起来。
+2. **8 个工牌**、**帽子 + 特质**、**名字翻牌**、**评语**：仍然原生做，规则见下面。
+3. **OriginsScroll**：Width = Fill。卡片上原来的大汉字已经换成了水墨小画，每张卡的山形不同（改 **Painting seed** 就会换一种）；最后一张带朱红太阳。
+4. **Off the clock**：先拖一个 **DeskFiles**（宽 1296、高 640），在属性面板给 `nail-set-v12.jpg` 上传 `assets/img/nails.jpg`。再拖一个同样大小的 **PeelReveal**，把它的 **Underneath** 连到 DeskFiles。盖在上面的是一幅"我的名字画成的山水"，附一行英文解释。
+5. **SiteFooter**。
+
+原生部分的规则：
+- 内容最大宽 1260，左右留白 90（手机 20）。
+- 多列内容用 **Grid**，不要用纵向 Stack 一路排下去：
+  - 工牌 4 列 × 2 行，手机 2 列；
+  - 帽子横排、可换行；
+  - 三条特质 3 列；
+  - 翻牌 3 列，每张 1:1.2；
+  - 评语 2 列。
+- 文字：正文用 Inter 17，说明用 Inter 15，**mono 小字最小 13**。
 
 ## 6. Lens
 
@@ -116,11 +129,13 @@ Assets → Code → **+** → New Code File，按下面顺序建文件，**文�
   - 位置和角度默认已经摆好，可以在面板里微调。
   - 点照片会全屏放大。手机上会自动变成两栏网格。
 
-## 7. Footer（做成组件，4 个页面共用）
+## 7. Footer
 
-1. 先排一个 `FooterContent`：Eyebrow "Say hi"、H2、三个链接（邮箱 / LinkedIn / Instagram）；右下角放竖排的 `朱硯潤` 签名、红色印章和一行小字说明。
-2. 拖一个 **SealStamp**，宽 Fill、高 560，把 **Content** 连到 FooterContent。点击空白处会盖章，点链接不会。
-3. 最底下一条细线，左边 "© 2026 Annora Zhu"，右边 "Hand-coded in Waterloo"。
+每个页面最底下放一个 **SiteFooter**，Width = Fill，旧的 FooterContent 加 SealStamp 可以删掉。
+- 左边：Say hi、大标题、邮箱、LinkedIn、Instagram。
+- 右边：横排的行书"朱硯潤"，旁边一枚**白文隶书印章**（硯上潤下，像真的石章盖出来的效果）。下面是拼音和一句英文说明。
+- 底部：一道水墨山，再往下是版权行。
+- 在空白处点一下会盖一枚同样的印章，点链接不会。
 
 ## 8. 发布前检查
 

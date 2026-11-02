@@ -55,9 +55,9 @@
   if (cv) {
     const ctx = cv.getContext('2d');
     const photo = new Image();
-    photo.src = 'assets/img/me-crop.jpg';
+    photo.src = 'me-crop.jpg';
     const mask = new Image(); // person/background matte, made offline from the same photo
-    mask.src = 'assets/img/me-mask.png';
+    mask.src = 'me-mask.png';
     const GLYPHS = '听心光人影墨留白山水真美食舞星画看愛夢静月花雨雲誠朱硯潤';
     let W = 0, H = 0, R = 0, buckets = [], ready = false, visible = true, raw = false;
     const lens = { x: 0, y: 0, tx: 0, ty: 0, active: false, last: 0 };
@@ -373,9 +373,9 @@
       if (e.target.closest('a')) return;
       const r = zone.getBoundingClientRect();
       const s = document.createElement('span');
-      s.className = 'seal dx dropped';
+      s.className = 'dropped';
       s.setAttribute('aria-hidden', 'true');
-      s.textContent = '硯潤';
+      s.innerHTML = site.sealSVG ? site.sealSVG(64) : '';
       s.style.left = e.clientX - r.left + 'px';
       s.style.top = e.clientY - r.top + 'px';
       s.style.rotate = (Math.random() * 16 - 8) + 'deg';

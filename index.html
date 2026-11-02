@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="preload" href="assets/fonts/danxingshu-subset.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="danxingshu-subset.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,21 +25,20 @@
 </nav>
 
 <header class="hero">
+  <div class="hero-ink" data-ink="landscape" data-seed="5" data-sun="off" data-parallax aria-hidden="true"></div>
   <div class="hero-copy" data-depth="-12">
     <p class="mono kicker"><span class="dot"></span>Open to marketing &amp; product internships</p>
     <h1>I listen for what people <em>don't</em> say.</h1>
+    <p class="hero-note">Marketing &amp; product-minded designer studying Global Business &amp; Digital Arts at the University of Waterloo.</p>
+    <div class="hero-cta"><a class="btn-lg" href="work.html">See my work →</a><a class="link" href="about.html">More about me</a></div>
   </div>
-
   <figure class="portrait" data-depth="18">
     <canvas id="inkPortrait" role="img" aria-label="A portrait of Annora drawn in calligraphy characters. Your cursor acts as a camera lens that reveals the real photo."></canvas>
-    <figcaption class="mono">
-      <span>↖ Move your cursor — it's a viewfinder.</span>
-      <span class="legend">Drawn in <b class="dx">听</b> listen · <b class="dx">心</b> heart · <b class="dx">光</b> light · <b class="dx">人</b> people</span>
+    <figcaption>
+      <span class="mono cue"><span class="cue-mouse">↖ Move your cursor over me — it's a camera lens.</span><span class="cue-touch">Drag a finger over me — it's a camera lens.</span></span>
+      <span class="legend">Up close, the portrait is written rather than drawn: hundreds of brushed characters for <em>listen</em>, <em>heart</em>, <em>light</em> and <em>people</em>.</span>
     </figcaption>
   </figure>
-
-  <p class="hero-note mono" data-depth="-6">Marketing &amp; product-minded designer. Global Business &amp; Digital Arts, University of Waterloo.</p>
-
   <div class="scroll-cue mono">Scroll</div>
 </header>
 
@@ -59,17 +58,17 @@
   <p class="mono eyebrow">Look around</p>
   <div class="doors">
     <a class="door reveal" href="work.html">
-      <img src="assets/work/excel-gum.jpg" alt="" data-speed="-0.05">
+      <img src="excel-gum.jpg" alt="" data-speed="-0.05">
       <span class="arrow">→</span>
       <div class="door-text"><span class="mono">01 · 11 projects</span><h3>Work</h3></div>
     </a>
     <a class="door reveal" href="about.html">
-      <img src="assets/img/beijing.jpg" alt="" data-speed="-0.05">
+      <img src="beijing.jpg" alt="" data-speed="-0.05">
       <span class="arrow">→</span>
       <div class="door-text"><span class="mono">02 · Beijing → Waterloo</span><h3>About</h3></div>
     </a>
     <a class="door reveal" href="lens.html">
-      <img src="assets/img/lens-poker.jpg" alt="" data-speed="-0.05">
+      <img src="lens-poker.jpg" alt="" data-speed="-0.05">
       <span class="arrow">→</span>
       <div class="door-text"><span class="mono">03 · Portraits on a CCD</span><h3>Lens</h3></div>
     </a>
@@ -85,16 +84,17 @@
       <a href="https://www.linkedin.com/in/annora-zhu-1355352b9">LinkedIn ↗</a>
       <a href="https://www.instagram.com/zz_annora">Instagram ↗</a>
     </div>
-    <div class="signature">
-      <span class="sig dx">朱硯潤</span>
-      <span class="seal dx" aria-hidden="true">硯潤</span>
-      <span class="mono sig-note">My name, signed. A seal is how you sign a painting.</span>
-    </div>
+    <figure class="signature">
+      <div class="sig-row"><span class="sig dx">朱硯潤</span><span class="sig-seal" data-seal="96"></span></div>
+      <figcaption><span class="mono sig-roman">ZHŪ YÀNRÙN</span><span class="sig-note">My name, signed and sealed — the way a painter finishes a painting.</span></figcaption>
+    </figure>
     <p class="mono stamp-hint" id="stampHint">Click anywhere in here to leave your own seal.</p>
   </div>
+  <div class="footer-ink" data-ink="ridge" data-seed="12" aria-hidden="true"></div>
   <div class="fine mono"><span>© 2026 Annora Zhu</span><span>Hand-coded in Waterloo</span></div>
 </footer>
 
 <script src="main.js"></script>
+<script src="ink.js"></script>
 </body>
 </html>

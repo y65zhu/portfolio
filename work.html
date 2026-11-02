@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="preload" href="assets/fonts/danxingshu-subset.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="danxingshu-subset.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -56,17 +56,18 @@
       <a href="https://www.linkedin.com/in/annora-zhu-1355352b9">LinkedIn ↗</a>
       <a href="https://www.instagram.com/zz_annora">Instagram ↗</a>
     </div>
-    <div class="signature">
-      <span class="sig dx">朱硯潤</span>
-      <span class="seal dx" aria-hidden="true">硯潤</span>
-      <span class="mono sig-note">My name, signed. A seal is how you sign a painting.</span>
-    </div>
+    <figure class="signature">
+      <div class="sig-row"><span class="sig dx">朱硯潤</span><span class="sig-seal" data-seal="96"></span></div>
+      <figcaption><span class="mono sig-roman">ZHŪ YÀNRÙN</span><span class="sig-note">My name, signed and sealed — the way a painter finishes a painting.</span></figcaption>
+    </figure>
     <p class="mono stamp-hint" id="stampHint">Click anywhere in here to leave your own seal.</p>
   </div>
+  <div class="footer-ink" data-ink="ridge" data-seed="12" aria-hidden="true"></div>
   <div class="fine mono"><span>© 2026 Annora Zhu</span><span>Hand-coded in Waterloo</span></div>
 </footer>
 
 <script src="main.js"></script>
+<script src="ink.js"></script>
 <script src="work.js"></script>
 </body>
 </html>
