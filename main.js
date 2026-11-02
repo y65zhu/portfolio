@@ -384,25 +384,36 @@
     let peeling = false, peelMoved = false;
     corner.addEventListener('pointerenter', () => { if (!peeling && !peeled) animate({ x: stage.clientWidth - 110, y: stage.clientHeight - 90 }, 400); });
     corner.addEventListener('pointerleave', () => { if (!peeling && !peeled) animate(rest(), 400); });
-    corner.addEventListener('pointerdown', e => {
-      peeling = true; peelMoved = false;
-      cancelAnimationFrame(anim);
-      corner.setPointerCapture(e.pointerId);
-    });
-    corner.addEventListener('pointermove', e => {
+    // Follow the pointer at the window level and finish on *any* way the drag
+    // can end (release, cancel, lost capture, window blur), so the sheet is
+    // never left hanging half-peeled.
+    const follow = e => {
       if (!peeling) return;
       peelMoved = true;
       const r = stage.getBoundingClientRect();
       render(clamp(e.clientX - r.left, -r.width, r.width), clamp(e.clientY - r.top, -r.height, r.height));
-    });
-    corner.addEventListener('pointerup', () => {
+    };
+    const finish = () => {
       if (!peeling) return;
       peeling = false;
+      removeEventListener('pointermove', follow);
       if (!peelMoved) return; // a plain click is handled below
       const w = stage.clientWidth, h = stage.clientHeight;
-      if (Math.hypot(w - peel.x, h - peel.y) > Math.min(w, h) * 0.55) peelAway();
+      // past roughly a third of the way, it comes off; otherwise it settles back
+      if (Math.hypot(w - peel.x, h - peel.y) > Math.min(w, h) * 0.35) peelAway();
       else animate(rest(), 500);
+    };
+    corner.addEventListener('pointerdown', e => {
+      if (e.button !== 0) return;
+      e.preventDefault(); // no text selection or native drag to cancel the peel
+      peeling = true; peelMoved = false;
+      cancelAnimationFrame(anim);
+      try { corner.setPointerCapture(e.pointerId); } catch {}
+      addEventListener('pointermove', follow);
     });
+    ['pointerup', 'pointercancel'].forEach(t => addEventListener(t, finish));
+    corner.addEventListener('lostpointercapture', finish);
+    addEventListener('blur', finish);
     corner.addEventListener('click', () => { if (!peelMoved && !peeled) peelAway(); peelMoved = false; });
     reset.addEventListener('click', () => {
       peeled = false; if (win) win.hidden = true;
