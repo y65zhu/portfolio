@@ -12,7 +12,7 @@
       ],
       stats: [['6→3', 'onboarding screens'], ['15', 'friction points fixed'], ['Opt-in', 'breaks, instead of automatic']],
       meta: [['Role', 'Front-end design · UX · Marketing'], ['Status', 'iOS · in development']],
-      links: [['Try the prototype', OLD + 'dofocus.html']],
+      links: [['Read the marketing case study', 'dofocus-case.html'], ['Try the prototype', OLD + 'dofocus.html']],
       media: [
         { video: OLD + 'dofocus/walkthrough.mp4', cap: 'Full walkthrough' },
         { img: 'dofocus-session.jpg', cap: 'In session' },
@@ -336,7 +336,7 @@
           <div class="body">${p.body.map(t => `<p>${esc(t)}</p>`).join('')}</div>
           ${p.stats ? `<div class="d-stats">${p.stats.map(([a, b]) => `<div><strong>${a}</strong><span>${b}</span></div>`).join('')}</div>` : ''}
           <dl class="d-meta mono">${p.meta.map(([a, b]) => `<dt>${a}</dt><dd>${esc(b)}</dd>`).join('')}</dl>
-          ${p.links.length ? `<div class="d-links">${p.links.map(([t, u], i) => `<a class="pill${i ? ' ghost' : ''}" href="${u}" target="_blank" rel="noopener">${t} ↗</a>`).join('')}</div>` : ''}
+          ${p.links.length ? `<div class="d-links">${p.links.map(([t, u], i) => (/^https?:/.test(u) ? `<a class="pill${i ? ' ghost' : ''}" href="${u}" target="_blank" rel="noopener">${t} ↗</a>` : `<a class="pill${i ? ' ghost' : ''}" href="${u}">${t} →</a>`)).join('')}</div>` : ''}
         </div>
         <div class="d-cover">${p.cover ? `<img src="${p.cover}" alt="${esc(p.title)}" style="view-transition-name: proj-cover" data-zoom>` : coverHTML(p).replace('type-cover', 'type-cover" style="aspect-ratio:4/3')}</div>
       </div>

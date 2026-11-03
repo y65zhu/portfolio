@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DoFocus Case Study · Annora Zhu</title>
+  <meta name="description" content="Marketing case study: positioning, pricing and launching DoFocus, an iOS focus app with a buddy, against Forest, Focus Friend, Opal, Flora and Finch.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preload" href="danxingshu-subset.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=202611030043">
+  <style>
+    .cs { max-width: 1180px; margin: 0 auto; }
+    .cs section { padding-left: var(--gutter); padding-right: var(--gutter); padding-top: clamp(72px, 9vw, 120px); }
+    .cs-hero { padding-top: clamp(130px, 16vw, 180px) !important; display: grid; grid-template-columns: 1.25fr .75fr; gap: clamp(28px, 5vw, 72px); align-items: end; }
+    .cs-hero h1 { font-size: clamp(48px, 6.4vw, 96px); }
+    .cs-hero .lead { margin-top: 24px; }
+    .cs-hero figure { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cs-hero img { width: 100%; aspect-ratio: 9/19; object-fit: cover; border-radius: 18px; border: 1px solid var(--rule); }
+    .cs-facts { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-top: 48px; }
+    .cs-facts div { padding: 22px 20px; border-left: 1px solid var(--rule); }
+    .cs-facts div:first-child { border-left: 0; padding-left: 0; }
+    .cs-facts strong { display: block; font: 400 clamp(30px, 3.4vw, 44px)/1 var(--display); }
+    .cs-facts span { display: block; margin-top: 8px; font: 300 15px/1.45 var(--sans); color: var(--ink-2); }
+    .cs-num { font: 500 13px var(--mono); color: var(--zhu); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+    .cs h2 { max-width: 18em; }
+    .cs-text { max-width: 44em; margin-top: 22px; font: 300 18px/1.65 var(--sans); color: var(--ink-2); }
+    .cs-text strong { color: var(--ink); font-weight: 500; }
+    .cs-table-wrap { margin-top: 32px; overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper-3); }
+    .cs table { width: 100%; border-collapse: collapse; font: 400 15px/1.45 var(--sans); min-width: 720px; }
+    .cs th { text-align: left; font: 500 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); padding: 14px 16px; border-bottom: 1px solid var(--rule); background: var(--paper-2); white-space: nowrap; }
+    .cs td { padding: 13px 16px; border-bottom: 1px solid var(--rule); vertical-align: top; color: var(--ink-2); }
+    .cs tr:last-child td { border-bottom: 0; }
+    .cs td:first-child { color: var(--ink); font-weight: 500; white-space: nowrap; }
+    .cs td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .cs tr.us td { background: color-mix(in srgb, var(--zhu) 7%, transparent); }
+    .cs tr.us td:first-child { color: var(--zhu); }
+    .cs-note { margin-top: 12px; font: 400 13px/1.5 var(--mono); color: var(--ink-3); }
+    .cs-note a { border-bottom: 1px solid var(--rule); }
+    .cs-two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+    .cs-two > *, .cs-hero > *, .cs section { min-width: 0; }
+    .cs-card { border: 1px solid var(--rule); border-radius: 6px; background: var(--paper-3); padding: 24px; }
+    .cs-card h4 { font: 500 13px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 18px; }
+    .bars { display: grid; gap: 12px; }
+    .bar { display: grid; grid-template-columns: 110px 1fr 70px; align-items: center; gap: 12px; font: 400 14px var(--sans); }
+    .bar i { display: block; height: 14px; border-radius: 2px; background: var(--ink-3); width: var(--w); }
+    .bar.hi i { background: var(--zhu); }
+    .bar b { font: 500 13px var(--mono); text-align: right; font-weight: 500; }
+    .map svg { width: 100%; height: auto; display: block; }
+    .cs-quote { margin-top: 32px; padding: 26px 30px; border-left: 3px solid var(--zhu); background: var(--paper-3); font: 400 clamp(20px, 2vw, 26px)/1.4 var(--display); max-width: 36em; }
+    .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font: 500 12px var(--mono); border: 1px solid var(--rule); color: var(--ink-2); white-space: nowrap; }
+    .tag.free { border-color: #9cbf9f; color: #3f6b45; }
+    .tag.plus { border-color: var(--zhu); color: var(--zhu); }
+    .tag.plan { border-color: #c8b48a; color: #7a6230; }
+    .cs-back { display: inline-block; margin-top: 28px; }
+    @media (max-width: 900px) {
+      .cs-hero, .cs-two { grid-template-columns: 1fr; }
+      .cs-hero figure { max-width: 360px; }
+      .cs-facts { grid-template-columns: 1fr 1fr; }
+      .cs-facts div:nth-child(3) { border-left: 0; padding-left: 0; }
+      .bar { grid-template-columns: 92px 1fr 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="index.html"><span class="dx">朱</span><span class="name-en">Annora Zhu</span></a>
+  <ul class="tabs">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html" aria-current="page">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="lens.html">Lens</a></li>
+  </ul>
+  <a class="btn" href="#hello">Say hi</a>
+</nav>
+
+<main class="cs">
+
+<section class="cs-hero">
+  <div>
+    <p class="mono eyebrow">Marketing case study · DoFocus · pre-launch</p>
+    <h1>Selling focus to people who <em>hate</em> being told to focus.</h1>
+    <p class="lead">DoFocus is an iOS focus app where a hand-drawn buddy works beside you. I own its front end and all of its marketing. This is how I sized up the category, picked a position, priced it, and planned the launch.</p>
+    <a class="link cs-back" href="work.html#dofocus">← Back to the project</a>
+  </div>
+  <figure>
+    <img src="dofocus-home.jpg" alt="DoFocus home screen with the buddy's room">
+    <img src="dofocus-session.jpg" alt="DoFocus during a focus session">
+  </figure>
+</section>
+
+<section style="padding-top:0">
+  <div class="cs-facts">
+    <div><strong>5</strong><span>competitors benchmarked on price, rating and model</span></div>
+    <div><strong>1</strong><span>paid feature: the AI chat. The focus loop stays free</span></div>
+    <div><strong>2</strong><span>languages at launch: English &amp; Simplified Chinese (~640 strings)</span></div>
+    <div><strong>3rd</strong><span>finished session is the first time Plus is offered</span></div>
+  </div>
+</section>
+
+<!-- 01 market -->
+<section>
+  <p class="cs-num">01 · The category</p>
+  <h2>Everyone sells focus. Most sell it with a stick.</h2>
+  <p class="cs-text">I benchmarked the five apps a DoFocus user is most likely to have tried. The pattern: <strong>the category is crowded and well-rated</strong> — every one sits at 4.7★ or above — so “good timer” is not a reason to switch. What differs is how each app treats you when you slip.</p>
+  <div class="cs-table-wrap">
+    <table>
+      <thead><tr><th>App</th><th>Rating</th><th>Ratings</th><th>Chart (US, top free)</th><th>App Store subtitle</th><th>If you quit early…</th></tr></thead>
+      <tbody>
+        <tr><td>Forest</td><td class="n">4.8★</td><td class="n">50K</td><td class="n">Productivity #197</td><td>Pomodoro Timer, ADHD &amp; Study</td><td>Your tree dies</td></tr>
+        <tr><td>Flora</td><td class="n">4.8★</td><td class="n">83K</td><td class="n">Productivity, unranked</td><td>To-do list, habit tracker</td><td>Your tree dies</td></tr>
+        <tr><td>Opal</td><td class="n">4.7★</td><td class="n">91K</td><td class="n">Productivity #75</td><td>Focus, App Blocker &amp; Timer</td><td>The apps stay blocked</td></tr>
+        <tr><td>Focus Friend</td><td class="n">4.8★</td><td class="n">9.8K</td><td class="n">Productivity #120</td><td>ADHD-friendly Focus Timer</td><td>Your bean is sad</td></tr>
+        <tr><td>Finch</td><td class="n">4.9★</td><td class="n">771K</td><td class="n">Health &amp; Fitness #19</td><td>Daily Journal &amp; Habit Tracker</td><td>n/a — a self-care pet, not a timer</td></tr>
+        <tr class="us"><td>DoFocus</td><td class="n">—</td><td class="n">—</td><td class="n">in TestFlight</td><td>(see 04)</td><td>Nothing, if it's in the first minutes — a mis-start isn't counted</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cs-note">Source: US App Store listings, read 3 Nov 2026 —
+    <a href="https://apps.apple.com/us/app/forest-focus-for-productivity/id866450515">Forest</a> ·
+    <a href="https://apps.apple.com/us/app/flora-green-focus/id1225155794">Flora</a> ·
+    <a href="https://apps.apple.com/us/app/opal-screen-time-control/id1497465230">Opal</a> ·
+    <a href="https://apps.apple.com/us/app/id6742278016">Focus Friend</a> ·
+    <a href="https://apps.apple.com/us/app/finch-self-care-pet/id1528595748">Finch</a>. Ratings and ranks move daily.</p>
+
+  <div class="cs-two">
+    <div class="cs-card">
+      <h4>Number of ratings — a proxy for reach</h4>
+      <div class="bars">
+        <div class="bar hi"><span>Finch</span><i style="--w:100%"></i><b>771K</b></div>
+        <div class="bar"><span>Opal</span><i style="--w:11.8%"></i><b>91K</b></div>
+        <div class="bar"><span>Flora</span><i style="--w:10.8%"></i><b>83K</b></div>
+        <div class="bar"><span>Forest</span><i style="--w:6.5%"></i><b>50K</b></div>
+        <div class="bar"><span>Focus Friend</span><i style="--w:1.3%"></i><b>9.8K</b></div>
+      </div>
+      <p class="cs-note">The biggest audience belongs to the app that makes you <em>care for a character</em>, not the one that punishes you. That's the lane DoFocus borrows from.</p>
+    </div>
+    <div class="cs-card map">
+      <h4>Positioning — my read of the category</h4>
+      <svg viewBox="0 0 420 300" role="img" aria-label="Positioning map: pressure versus companionship on the horizontal axis, timer-only versus plans your day on the vertical axis. DoFocus sits alone in the companion and planning corner.">
+        <line x1="210" y1="20" x2="210" y2="280" stroke="#d3c8b6"/><line x1="20" y1="150" x2="400" y2="150" stroke="#d3c8b6"/>
+        <text x="22" y="166" font-family="IBM Plex Mono" font-size="10" fill="#8f857a">PRESSURE</text>
+        <text x="398" y="166" font-family="IBM Plex Mono" font-size="10" fill="#8f857a" text-anchor="end">COMPANIONSHIP</text>
+        <text x="216" y="30" font-family="IBM Plex Mono" font-size="10" fill="#8f857a">PLANS YOUR DAY</text>
+        <text x="216" y="276" font-family="IBM Plex Mono" font-size="10" fill="#8f857a">JUST A TIMER</text>
+        <g font-family="Inter" font-size="13" fill="#231f1c">
+          <circle cx="78" cy="226" r="6" fill="#8f857a"/><text x="88" y="230">Forest</text>
+          <circle cx="98" cy="104" r="6" fill="#8f857a"/><text x="108" y="108">Flora</text>
+          <circle cx="58" cy="190" r="6" fill="#8f857a"/><text x="68" y="194">Opal</text>
+          <circle cx="300" cy="232" r="6" fill="#8f857a"/><text x="310" y="236">Focus Friend</text>
+          <circle cx="352" cy="118" r="6" fill="#8f857a"/><text x="318" y="102">Finch</text>
+          <circle cx="318" cy="58" r="9" fill="#b23a2b"/><text x="332" y="62" fill="#b23a2b" font-weight="500">DoFocus</text>
+        </g>
+      </svg>
+      <p class="cs-note">Finch plans habits, not work. Nobody combined a companion with a real day plan — tasks, calendar, blocking.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 positioning -->
+<section>
+  <p class="cs-num">02 · Position</p>
+  <h2>Not a coach. A friend at the next desk.</h2>
+  <p class="cs-text">My bet: most people don't lack a timer — they've already quit one. Failure states — a dead tree, a locked phone — work until the first bad day, then the app becomes a reminder that you failed. So every product decision got checked against one line:</p>
+  <p class="cs-quote">“Whatever you focus on, I'll be doing it too.” — the buddy's first words in onboarding</p>
+  <div class="cs-table-wrap">
+    <table>
+      <thead><tr><th>Category habit</th><th>What DoFocus does instead</th><th>Why it matters for marketing</th></tr></thead>
+      <tbody>
+        <tr><td>Punish quitting</td><td>A mis-start in the first minutes can be abandoned and isn't counted; no strict lock mode</td><td>Nothing to feel guilty about = nothing to churn away from</td></tr>
+        <tr><td>Reward = currency</td><td>Coins were removed; you earn stars and decorate your buddy's room</td><td>Progress you can screenshot and share</td></tr>
+        <tr><td>Generic timer</td><td>Pick an activity (study, reading, project…) and the buddy does the same thing</td><td>Every session looks different on video</td></tr>
+        <tr><td>Can “cheat” to finish</td><td>Sessions can be made longer, never fast-forwarded to the reward</td><td>The reward stays honest, so it stays worth something</td></tr>
+        <tr><td>Lives only in the app</td><td>Lock-screen Live Activity, Dynamic Island, home-screen widgets</td><td>Free, daily brand impressions outside the app</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 03 pricing -->
+<section>
+  <p class="cs-num">03 · Pricing</p>
+  <h2>Charge for what costs us money. Give away the habit.</h2>
+  <p class="cs-text">Every chat with the buddy is an AI call we pay for; a timer costs nothing to run. So the line between free and paid follows the cost — and the habit people need to form before they'd ever pay stays free.</p>
+  <div class="cs-table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>Free</th><th>Plus</th></tr></thead>
+      <tbody>
+        <tr><td>Focus timer &amp; app blocking</td><td><span class="tag free">Included</span></td><td><span class="tag free">Included</span></td></tr>
+        <tr><td>Tasks &amp; calendar sync</td><td><span class="tag free">Included</span></td><td><span class="tag free">Included</span></td></tr>
+        <tr><td>Buddy, room &amp; shop</td><td><span class="tag free">Included</span></td><td><span class="tag free">Included</span></td></tr>
+        <tr><td>Chat &amp; planning with the buddy</td><td>3 messages a day</td><td><span class="tag plus">Unlimited planning</span></td></tr>
+        <tr><td>New content, ongoing</td><td>—</td><td><span class="tag plus">Yes</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cs-two">
+    <div class="cs-card">
+      <h4>What the category charges (US)</h4>
+      <div class="cs-table-wrap" style="margin-top:0">
+        <table style="min-width:0">
+          <thead><tr><th>App</th><th>Monthly</th><th>Yearly</th><th>Yearly saves</th></tr></thead>
+          <tbody>
+            <tr><td>Opal</td><td class="n">$19.99</td><td class="n">$99.99</td><td class="n">58%</td></tr>
+            <tr><td>Forest</td><td class="n">$5.99</td><td class="n">$35.99</td><td class="n">50%</td></tr>
+            <tr><td>Focus Friend</td><td class="n">$3.99</td><td class="n">$19.99</td><td class="n">58%</td></tr>
+            <tr><td>Flora</td><td colspan="3">Free; optional $0.99–$1.99 extras</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cs-note">Early-bird prices for Forest. Finch lists Plus at several prices from $5.99 to $69.99 without labelling the terms, so it's left out.</p>
+    </div>
+    <div class="cs-card">
+      <h4>Yearly plan, per month</h4>
+      <div class="bars">
+        <div class="bar"><span>Opal</span><i style="--w:100%"></i><b>$8.33</b></div>
+        <div class="bar"><span>Forest</span><i style="--w:36%"></i><b>$3.00</b></div>
+        <div class="bar hi"><span>Focus Friend</span><i style="--w:20%"></i><b>$1.67</b></div>
+      </div>
+      <p class="cs-note">The closest competitor — a companion timer — prices five times lower than the strictest one. DoFocus Plus sells a monthly and a yearly plan in one subscription group; the paywall reads live App Store prices and shows the yearly saving. Final prices are set at launch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 funnel -->
+<section>
+  <p class="cs-num">04 · The funnel</p>
+  <h2>Ask for money only after the habit has started.</h2>
+  <p class="cs-text">Plus is never the first thing a new user sees. It appears at four moments, each placed after the user has already got something out of the app.</p>
+  <div class="cs-table-wrap">
+    <table>
+      <thead><tr><th>Moment</th><th>What the user sees</th><th>Why there</th></tr></thead>
+      <tbody>
+        <tr><td>Onboarding, last page</td><td>“Chat with me” — plan your day together, 3 free messages a day, more with Plus</td><td>Sets expectations early, so the limit later isn't a surprise</td></tr>
+        <tr><td>3rd finished session</td><td>A small card on the reward screen: “Tell me how that went?”, once only, hidden for Plus users</td><td>By the third session the habit has started, and the ask arrives as a question, not a sales pitch</td></tr>
+        <tr><td>4th chat message of the day</td><td>The paywall opens; what you typed is kept</td><td>Intent is highest mid-conversation, and losing your text would turn a sale into a complaint</td></tr>
+        <tr><td>Settings, top card</td><td>Get Plus · Manage · Restore purchases</td><td>Always findable, including for App Review</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cs-text">Before the paywall, onboarding has to get people to a first session. It asks for the minimum: say hi, make the buddy look like you, pick what you usually focus on — then two optional permission pages (calendar, app blocking) that can be skipped, and a “Start my first focus” button that begins a session straight away.</p>
+</section>
+
+<!-- 05 launch -->
+<section>
+  <p class="cs-num">05 · Launch plan</p>
+  <h2>Two languages, one character, lots of screen recordings.</h2>
+  <p class="cs-text">The buddy is the ad. A five-second clip of it studying next to someone's real lock screen explains the product faster than any feature list — and the app ships in English and Simplified Chinese, so the same clips can run on both sides.</p>
+  <div class="cs-table-wrap">
+    <table>
+      <thead><tr><th>Channel</th><th>Audience</th><th>Content</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>App Store page</td><td>People searching “focus timer”, “pomodoro”, “study”</td><td>Subtitle built around the buddy, e.g. “Focus timer with a buddy”; screenshots led by the room and the lock screen</td><td><span class="tag plan">Planned</span></td></tr>
+        <tr><td>TikTok · Instagram Reels</td><td>English-speaking students</td><td>Study-with-me videos with the Live Activity on screen; room makeovers after a week of sessions</td><td><span class="tag plan">Planned</span></td></tr>
+        <tr><td>Xiaohongshu (RED)</td><td>Chinese-speaking students, here and abroad</td><td>Aesthetic desk and widget setups; the buddy dressed up as you; full Chinese interface</td><td><span class="tag plan">Planned</span></td></tr>
+        <tr><td>Campus · Waterloo</td><td>Exam season, co-op students</td><td>TestFlight invites during midterms; feedback straight into the product</td><td><span class="tag plan">Planned</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cs-note">Search terms come from what competitors put in their 30-character subtitles: “focus” and “timer” appear in three of five, “ADHD” in two, “habit tracker” in two.</p>
+</section>
+
+<!-- 06 measure -->
+<section>
+  <p class="cs-num">06 · What I'll measure</p>
+  <h2>Five numbers for the first 30 days.</h2>
+  <p class="cs-text">DoFocus isn't on the App Store yet, so there are no results here — and I'd rather show an honest empty column than invented ones. These are the metrics I'll set baselines for in the first month.</p>
+  <div class="cs-table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>How it's counted</th><th>What it tells me</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Store conversion</td><td>Installs ÷ product-page views</td><td>Whether the buddy sells itself in screenshots</td><td class="n">after launch</td></tr>
+        <tr><td>First-session rate</td><td>New users who finish one session on day 1</td><td>Whether onboarding is short enough</td><td class="n">after launch</td></tr>
+        <tr><td>Third-session rate</td><td>New users who reach session 3 within a week</td><td>How many ever see the Plus offer</td><td class="n">after launch</td></tr>
+        <tr><td>Paywall conversion</td><td>Subscriptions ÷ paywall views, split by moment</td><td>Which of the four moments actually sells</td><td class="n">after launch</td></tr>
+        <tr><td>Day-7 retention</td><td>Users with a session on day 7</td><td>Whether “no guilt” keeps people longer than “dead tree”</td><td class="n">after launch</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <a class="link cs-back" href="work.html#dofocus">← Back to DoFocus</a>
+</section>
+
+</main>
+
+<footer class="footer" id="hello">
+  <div class="stamp-zone" id="stampZone">
+    <p class="mono eyebrow">Say hi</p>
+    <h2>Have a product that needs a listener?</h2>
+    <div class="links">
+      <a href="mailto:y65zhu@uwaterloo.ca">y65zhu@uwaterloo.ca</a>
+      <a href="https://www.linkedin.com/in/annora-zhu-1355352b9">LinkedIn ↗</a>
+      <a href="https://www.instagram.com/zz_annora">Instagram ↗</a>
+    </div>
+    <figure class="signature">
+      <div class="sig-row"><span class="sig dx">朱硯潤</span><span class="sig-seal" data-seal="96"></span></div>
+      <figcaption><span class="mono sig-roman">ZHŪ YÀNRÙN</span><span class="sig-note">My name, signed and sealed — the way a painter finishes a painting.</span></figcaption>
+    </figure>
+    <p class="mono stamp-hint" id="stampHint">Click anywhere in here to leave your own seal.</p>
+  </div>
+  <div class="footer-ink" data-ink="ridge" data-seed="12" aria-hidden="true"></div>
+  <div class="fine mono"><span>© 2026 Annora Zhu</span><span>Hand-coded in Waterloo</span></div>
+</footer>
+
+<script src="main.js?v=202611030043"></script>
+<script src="ink.js?v=202611030043"></script>
+</body>
+</html>
