@@ -3,7 +3,7 @@
   const OLD = 'https://y65zhu.github.io/ProjectsPage/';
   const PROJECTS = [
     {
-      id: 'dofocus', cat: 'product brand', title: 'DoFocus', tab: 'iOS app',
+      id: 'dofocus', cat: 'product brand', title: 'DoFocus', tab: 'iOS app', page: 'dofocus-case.html',
       kick: 'A focus timer with a buddy.',
       cover: 'dofocus-home.jpg',
       body: [
@@ -37,7 +37,7 @@
       ]
     },
     {
-      id: 'biblely', cat: 'product', title: 'Biblely', tab: 'Bilingual app',
+      id: 'biblely', cat: 'product', title: 'Biblely', tab: 'Bilingual app', page: 'biblely-brief.html',
       kick: 'Read it, then actually understand it.',
       cover: 'biblely.jpg',
       body: [
@@ -191,7 +191,7 @@
   const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
   // the newest work sits in the middle of the fan, DoFocus raised at rest
-  const ORDER = ['excel', 'waterlooworks', 'tryon', 'cantalk', 'biblely', 'dofocus', 'brochure', 'posters', 'antiques', 'jane', 'forget'];
+  const ORDER = ['waterlooworks', 'tryon', 'cantalk', 'excel', 'biblely', 'dofocus', 'brochure', 'posters', 'antiques', 'jane', 'forget'];
   const rank = id => (ORDER.includes(id) ? ORDER.indexOf(id) : ORDER.length);
   PROJECTS.sort((a, b) => rank(a.id) - rank(b.id));
   const FEATURED = 'dofocus';
@@ -319,28 +319,34 @@
   function render(idx) {
     const p = PROJECTS[idx];
     current = idx;
+    const media = p.media.filter(m => m.img !== p.cover);
     detail.innerHTML = `
       <div class="d-bar">
-        <button class="pill ghost" data-close>← All work</button>
+        <button class="pill" data-close>← All work</button>
         <span class="mono">${String(idx + 1).padStart(2, '0')} / ${PROJECTS.length}</span>
         <div class="group">
           <button class="round" data-step="-1" aria-label="Previous project">←</button>
           <button class="round" data-step="1" aria-label="Next project">→</button>
         </div>
       </div>
-      <div class="d-hero">
-        <div>
-          <p class="mono eyebrow">${p.tab}</p>
-          <h2 id="dTitle">${p.title}</h2>
-          <p class="kick">${p.kick}</p>
-          <div class="body">${p.body.map(t => `<p>${esc(t)}</p>`).join('')}</div>
-          ${p.stats ? `<div class="d-stats">${p.stats.map(([a, b]) => `<div><strong>${a}</strong><span>${b}</span></div>`).join('')}</div>` : ''}
-          <dl class="d-meta mono">${p.meta.map(([a, b]) => `<dt>${a}</dt><dd>${esc(b)}</dd>`).join('')}</dl>
-          ${p.links.length ? `<div class="d-links">${p.links.map(([t, u], i) => (/^https?:/.test(u) ? `<a class="pill${i ? ' ghost' : ''}" href="${u}" target="_blank" rel="noopener">${t} ↗</a>` : `<a class="pill${i ? ' ghost' : ''}" href="${u}">${t} →</a>`)).join('')}</div>` : ''}
+      <article class="d-page">
+        <div class="d-hero">
+          <div>
+            <p class="mono eyebrow">${p.tab}</p>
+            <h2 id="dTitle">${p.title}</h2>
+            <p class="kick">${p.kick}</p>
+            <div class="body">${p.body.map(t => `<p>${esc(t)}</p>`).join('')}</div>
+            ${p.links.length ? `<div class="d-links">${p.links.map(([t, u], i) => (/^https?:/.test(u) ? `<a class="pill${i ? ' ghost' : ''}" href="${u}" target="_blank" rel="noopener">${t} ↗</a>` : `<a class="pill${i ? ' ghost' : ''}" href="${u}">${t} →</a>`)).join('')}</div>` : ''}
+          </div>
+          <div class="d-cover">${p.cover ? `<img src="${p.cover}" alt="${esc(p.title)}" style="view-transition-name: proj-cover" data-zoom>` : coverHTML(p).replace('type-cover', 'type-cover" style="aspect-ratio:4/3')}</div>
         </div>
-        <div class="d-cover">${p.cover ? `<img src="${p.cover}" alt="${esc(p.title)}" style="view-transition-name: proj-cover" data-zoom>` : coverHTML(p).replace('type-cover', 'type-cover" style="aspect-ratio:4/3')}</div>
-      </div>
-      <div class="d-gallery">${p.media.filter(m => m.img !== p.cover).map(mediaHTML).join('')}</div>`;
+        <div class="d-facts">
+          ${p.stats ? p.stats.map(([a, b]) => `<div><strong>${a}</strong><span>${b}</span></div>`).join('') : ''}
+          ${p.meta.map(([a, b]) => `<div class="m"><span class="mono">${a}</span><b>${esc(b)}</b></div>`).join('')}
+        </div>
+        ${media.length ? `<p class="mono eyebrow d-gal-head">Gallery · ${media.length}</p><div class="d-gallery">${media.map(mediaHTML).join('')}</div>` : ''}
+      </article>
+      <button class="back-float" data-close>← All work</button>`;
     detail.scrollTop = 0;
   }
 
@@ -350,6 +356,8 @@
   function open(id, card) {
     const idx = PROJECTS.findIndex(p => p.id === id);
     if (idx < 0) return;
+    // projects with a full case study open it instead of the sheet
+    if (PROJECTS[idx].page) { location.href = PROJECTS[idx].page; return; }
     fromCard = card || cards.find(c => c.dataset.id === id);
     const img = fromCard && $('.cover img', fromCard);
     if (img) img.style.viewTransitionName = 'proj-cover';
@@ -382,6 +390,7 @@
 
   function go(stepBy) {
     const idx = (current + stepBy + PROJECTS.length) % PROJECTS.length;
+    if (PROJECTS[idx].page) { location.href = PROJECTS[idx].page; return; }
     vt(() => render(idx));
     history.replaceState(null, '', '#' + PROJECTS[idx].id);
   }

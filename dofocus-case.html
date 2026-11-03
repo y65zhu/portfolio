@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="preload" href="danxingshu-subset.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=202611030127">
-  <link rel="stylesheet" href="case.css?v=202611030127">
+  <link rel="stylesheet" href="styles.css?v=202611030141">
+  <link rel="stylesheet" href="case.css?v=202611030141">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
     <p class="mono eyebrow">Marketing case study · DoFocus · pre-launch</p>
     <h1>Selling focus to people who <em>hate</em> being told to focus.</h1>
     <p class="lead">DoFocus is an iOS focus app where a hand-drawn buddy works beside you. I own its front end and all of its marketing. This is how I sized up the category, picked a position, priced it, and planned the launch.</p>
-    <a class="link cs-back" href="work.html#dofocus">← Back to the project</a>
+    <div class="d-links" style="margin-top:28px"><a class="pill" href="#prototype">Try the prototype ↓</a></div>
   </div>
   <figure>
     <img src="dofocus-home.jpg" alt="DoFocus home screen with the buddy's room">
@@ -46,6 +46,23 @@
     <div><strong>1</strong><span>paid feature: the AI chat. The focus loop stays free</span></div>
     <div><strong>2</strong><span>languages at launch: English &amp; Simplified Chinese (~640 strings)</span></div>
     <div><strong>3rd</strong><span>finished session is the first time Plus is offered</span></div>
+  </div>
+</section>
+
+<!-- prototype -->
+<section id="prototype">
+  <p class="cs-num">Try it · interactive prototype</p>
+  <h2>Tap through the app before you read about it.</h2>
+  <div class="proto">
+    <div class="proto-side">
+      <p class="cs-text" style="margin-top:0">Tap the phone like the real app. Tap anywhere else on the phone to see what's tappable — or jump to any screen below.</p>
+      <ol class="proto-list" id="protoList"></ol>
+      <a class="link" href="https://y65zhu.github.io/ProjectsPage/dofocus/walkthrough.mp4" target="_blank" rel="noopener">Watch the full walkthrough ↗</a>
+    </div>
+    <div class="proto-stage">
+      <div class="proto-phone" id="protoPhone" role="group" aria-label="DoFocus prototype"><img id="protoScreen" alt=""></div>
+      <p class="mono proto-cap" id="protoCap"></p>
+    </div>
   </div>
 </section>
 
@@ -229,10 +246,12 @@
       </tbody>
     </table>
   </div>
-  <a class="link cs-back" href="work.html#dofocus">← Back to DoFocus</a>
+  <a class="link cs-back" href="work.html">← All work</a>
 </section>
 
 </main>
+
+<a class="back-float" href="work.html">← All work</a>
 
 <footer class="footer" id="hello">
   <div class="stamp-zone" id="stampZone">
@@ -253,7 +272,73 @@
   <div class="fine mono"><span>© 2026 Annora Zhu</span><span>Hand-coded in Waterloo</span></div>
 </footer>
 
-<script src="main.js?v=202611030127"></script>
-<script src="ink.js?v=202611030127"></script>
+<script src="main.js?v=202611030141"></script>
+<script src="ink.js?v=202611030141"></script>
+<script>
+  // DoFocus prototype: screens were captured at 402 × 874 points, so hotspots
+  // are placed in those units and scaled with the phone.
+  (() => {
+    const tabs = [
+      { x: 30, y: 800, w: 72, h: 50, to: 'home', label: 'Home tab' },
+      { x: 104, y: 800, w: 60, h: 50, to: 'ready', label: 'Focus tab' },
+      { x: 244, y: 800, w: 56, h: 50, to: 'tasks', label: 'Tasks tab' },
+      { x: 310, y: 800, w: 60, h: 50, to: 'me', label: 'Me tab' }
+    ];
+    const screens = {
+      hello:   { img: '10-hello', group: 'Onboarding', name: 'Meet your buddy', caption: 'Onboarding · 1 of 3',
+                 hot: [{ x: 20, y: 808, w: 362, h: 52, to: 'look', label: "Let's go" }] },
+      look:    { img: '11-look', group: 'Onboarding', name: 'Make it look like you', caption: 'Onboarding · 2 of 3 · pick an outfit',
+                 hot: [{ x: 20, y: 771, w: 112, h: 54, to: 'hello', label: 'Back' }, { x: 140, y: 771, w: 242, h: 54, to: 'picker', label: 'Next' }] },
+      picker:  { img: '12-picker', group: 'Onboarding', name: 'What do you focus on?', caption: 'Onboarding · 3 of 3',
+                 hot: [{ x: 20, y: 771, w: 112, h: 54, to: 'look', label: 'Back' }, { x: 140, y: 771, w: 242, h: 54, to: 'ready', label: 'Done' }] },
+      ready:   { img: '13-ready', group: 'Focus', name: 'Ready, not running', caption: 'Lands on the timer — you press play',
+                 hot: [{ x: 160, y: 650, w: 82, h: 82, to: 'session', label: 'Start focus' }, ...tabs] },
+      session: { img: '03-session', group: 'Focus', name: 'In session', caption: 'Tabs hide while you focus',
+                 hot: [{ x: 222, y: 662, w: 58, h: 58, to: 'ready', label: 'Stop' }] },
+      home:    { img: '01-home', group: 'App', name: 'Home', caption: 'One tap starts the selected preset',
+                 hot: [{ x: 17, y: 559, w: 178, h: 54, to: 'session', label: 'Start Project, 35 min' }, { x: 300, y: 625, w: 52, h: 28, to: 'tasks', label: 'See all tasks' }, { x: 360, y: 622, w: 30, h: 32, to: 'newtask', label: 'Add a task' }, ...tabs] },
+      tasks:   { img: '04-tasks', group: 'App', name: 'Tasks', caption: 'Priorities as a board',
+                 hot: [{ x: 338, y: 62, w: 50, h: 46, to: 'newtask', label: 'New task' }, ...tabs] },
+      newtask: { img: '05-newtask', group: 'App', name: 'New task', caption: 'Title first — the rest is optional',
+                 hot: [{ x: 18, y: 78, w: 80, h: 44, to: 'tasks', label: 'Cancel' }, { x: 318, y: 78, w: 70, h: 44, to: 'tasks', label: 'Add' }] },
+      me:      { img: '07-me', group: 'App', name: 'Me', caption: 'Zeros come with a next step',
+                 hot: [{ x: 328, y: 497, w: 46, h: 46, to: 'ready', label: 'Start focusing' }, ...tabs] }
+    };
+    const src = s => `dofocus-proto-${s.img}.jpg`;
+    const phone = document.getElementById('protoPhone'), img = document.getElementById('protoScreen');
+    const cap = document.getElementById('protoCap'), list = document.getElementById('protoList');
+    let current = null;
+    Object.values(screens).forEach(s => { new Image().src = src(s); });
+    Object.entries(screens).forEach(([id, s]) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<button type="button" data-id="${id}"><span>${s.name}</span><span class="mono">${s.group}</span></button>`;
+      li.firstChild.addEventListener('click', () => show(id));
+      list.appendChild(li);
+    });
+    function show(id) {
+      if (id === current) return;
+      const s = screens[id], first = current === null;
+      current = id;
+      img.classList.add('fading');
+      setTimeout(() => { img.src = src(s); img.alt = `DoFocus — ${s.name}`; img.classList.remove('fading'); }, first ? 0 : 120);
+      cap.textContent = s.caption;
+      phone.querySelectorAll('.hot').forEach(h => h.remove());
+      s.hot.forEach(h => {
+        const b = document.createElement('button');
+        b.className = 'hot'; b.type = 'button'; b.setAttribute('aria-label', h.label);
+        Object.assign(b.style, { left: `${h.x / 402 * 100}%`, top: `${h.y / 874 * 100}%`, width: `${h.w / 402 * 100}%`, height: `${h.h / 874 * 100}%` });
+        b.addEventListener('click', e => { e.stopPropagation(); show(h.to); });
+        phone.appendChild(b);
+      });
+      list.querySelectorAll('button').forEach(b => b.setAttribute('aria-current', b.dataset.id === id));
+    }
+    // a tap that misses every hotspot shows where they are
+    phone.addEventListener('click', () => {
+      phone.classList.remove('hinting'); void phone.offsetWidth; phone.classList.add('hinting');
+      setTimeout(() => phone.classList.remove('hinting'), 900);
+    });
+    show('hello');
+  })();
+</script>
 </body>
 </html>
