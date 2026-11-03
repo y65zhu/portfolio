@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WaterlooWorks — Create Job Posting</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;width:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;color:#1a1a1a;background:#f4f4f4;}
+
+  /* ── Shell ── */
+  .shell{display:flex;flex-direction:column;height:100vh;min-width:1024px;}
+
+  /* ── Top bar ── */
+  .topbar{height:44px;background:#1a1a1a;display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0;z-index:10;}
+  .topbar-logo{color:#fff;font-size:14px;font-weight:600;letter-spacing:-0.2px;}
+  .topbar-right{display:flex;align-items:center;gap:16px;}
+  .topbar-icon{width:28px;height:28px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .topbar-icon svg{width:14px;height:14px;stroke:#aaa;fill:none;}
+  .topbar-user{color:rgba(255,255,255,0.75);font-size:12px;display:flex;align-items:center;gap:5px;cursor:pointer;}
+
+  /* ── Body ── */
+  .body{display:flex;flex:1;overflow:hidden;}
+
+  /* ── Sidebar ── */
+  .sidebar{width:180px;background:#fff;border-right:1px solid #e5e5e5;flex-shrink:0;padding:12px 0;overflow-y:auto;}
+  .nav-item{padding:9px 16px;font-size:13px;color:#555;cursor:pointer;display:flex;align-items:center;gap:8px;border-left:3px solid transparent;}
+  .nav-item:hover{background:#fafafa;color:#1a1a1a;}
+  .nav-item.active{background:#fff8e6;color:#1a1a1a;font-weight:500;border-left-color:#E8A020;}
+  .nav-item svg{width:14px;height:14px;stroke:currentColor;fill:none;flex-shrink:0;}
+
+  /* ── Main content ── */
+  .main{flex:1;overflow-y:auto;display:flex;flex-direction:column;}
+  .content{flex:1;padding:28px 32px;background:#f4f4f4;}
+
+  /* ── Page header ── */
+  .pg-title{font-size:22px;font-weight:600;color:#1a1a1a;margin-bottom:4px;}
+  .pg-sub{font-size:13px;color:#777;margin-bottom:24px;}
+
+  /* ── Stepper ── */
+  .stepper{display:flex;align-items:center;margin-bottom:28px;}
+  .st-step{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .st-circle{width:30px;height:30px;border-radius:50%;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
+  .st-circle.done{background:#E8A020;color:#fff;}
+  .st-circle.active{background:transparent;border:2px solid #E8A020;color:#E8A020;}
+  .st-circle.todo{background:transparent;border:2px solid #ccc;color:#bbb;}
+  .st-lbl{font-size:12px;color:#666;white-space:nowrap;}
+  .st-lbl.active{color:#1a1a1a;font-weight:600;}
+  .st-line{flex:1;height:1px;background:#ddd;margin:0 8px;min-width:20px;}
+  .st-line.done{background:#E8A020;}
+
+  /* ── Layout panels ── */
+  .panels{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px;align-items:start;}
+
+  /* ── Card ── */
+  .card{background:#fff;border:1px solid #e5e5e5;border-radius:8px;padding:20px 22px;margin-bottom:16px;}
+  .card:last-child{margin-bottom:0;}
+  .card-title{font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:4px;}
+  .card-sub{font-size:12px;color:#888;margin-bottom:18px;line-height:1.5;}
+
+  /* ── Form elements ── */
+  .field-grp{margin-bottom:14px;}
+  .field-lbl{font-size:12px;color:#555;margin-bottom:5px;display:block;font-weight:500;}
+  .field-req{color:#E8A020;}
+  input[type=text],input[type=email],select,textarea{width:100%;padding:8px 11px;font-size:13px;border:1px solid #ddd;border-radius:6px;background:#fff;color:#1a1a1a;font-family:inherit;appearance:none;}
+  input[type=text]:focus,select:focus,textarea:focus{outline:none;border-color:#E8A020;box-shadow:0 0 0 3px rgba(232,160,32,0.1);}
+  textarea{resize:vertical;min-height:80px;line-height:1.5;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .field-hint{font-size:11px;color:#aaa;margin-top:4px;}
+
+  /* ── Tags ── */
+  .tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .tag{display:inline-flex;align-items:center;gap:4px;background:#f5f5f5;border:1px solid #e0e0e0;border-radius:999px;padding:3px 10px;font-size:12px;color:#333;}
+  .tag-rm{cursor:pointer;color:#aaa;font-size:11px;margin-left:2px;line-height:1;}
+  .tag-rm:hover{color:#E24B4A;}
+  .tag-add{display:flex;gap:8px;margin-top:8px;}
+
+  /* ── Sliders ── */
+  .slider-grp{margin-bottom:14px;}
+  .sl-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+  .sl-name{font-size:13px;color:#1a1a1a;}
+  .sl-val{font-size:13px;font-weight:600;color:#E8A020;min-width:38px;text-align:right;}
+  input[type=range]{width:100%;height:4px;accent-color:#E8A020;cursor:pointer;}
+  .total-row{display:flex;justify-content:space-between;align-items:center;padding:9px 13px;border-radius:6px;background:#fafafa;border:1px solid #eee;margin-top:12px;}
+  .total-lbl{font-size:12px;color:#777;}
+  .total-ok{font-size:13px;font-weight:600;color:#3B6D11;background:#EAF3DE;padding:2px 10px;border-radius:999px;}
+  .total-warn{font-size:13px;font-weight:600;color:#A32D2D;background:#FCEBEB;padding:2px 10px;border-radius:999px;}
+
+  /* ── Tip box ── */
+  .tip-box{background:#FFF8EC;border:1px solid #FAC775;border-radius:8px;padding:12px 14px;}
+  .tip-title{font-size:12px;font-weight:600;color:#633806;margin-bottom:3px;}
+  .tip-body{font-size:12px;color:#854F0B;line-height:1.6;}
+
+  /* ── Fair practices ── */
+  .practices{margin-top:0;}
+  .practice-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f5f5f5;}
+  .practice-item:last-child{border-bottom:none;}
+  .practice-dot{width:6px;height:6px;border-radius:50%;background:#E8A020;flex-shrink:0;margin-top:4px;}
+  .practice-text{font-size:12px;color:#555;line-height:1.5;}
+  .practice-text strong{color:#1a1a1a;font-weight:600;}
+
+  /* ── Preview card ── */
+  .preview-lbl{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+  .preview-dot-grn{width:7px;height:7px;border-radius:50%;background:#3B6D11;display:inline-block;}
+  .preview-sec{margin-bottom:12px;}
+  .preview-sec-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#aaa;margin-bottom:4px;font-weight:600;}
+  .crit-row{display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid #f5f5f5;}
+  .crit-row:last-child{border-bottom:none;}
+  .crit-name{font-size:12px;color:#333;flex-shrink:0;width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .crit-track{flex:1;height:4px;background:#f0f0f0;border-radius:2px;}
+  .crit-fill{height:100%;border-radius:2px;background:#E8A020;transition:width .3s;}
+  .crit-pct{font-size:12px;font-weight:600;color:#E8A020;flex-shrink:0;min-width:32px;text-align:right;}
+  .acct-badge{display:flex;align-items:flex-start;gap:8px;background:#EAF3DE;border:1px solid #C0DD97;border-radius:6px;padding:10px 12px;margin-top:12px;}
+  .acct-badge p{font-size:12px;color:#27500A;line-height:1.5;}
+
+  /* ── Step 1 ── */
+  .how-hiring{border:1px solid #e5e5e5;border-radius:8px;background:#fff;padding:16px;}
+  .how-steps{display:flex;justify-content:space-between;margin-bottom:14px;}
+  .how-step{text-align:center;flex:1;}
+  .how-num{width:32px;height:32px;border-radius:50%;background:#E8A020;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 5px;}
+  .how-lbl{font-size:11px;color:#777;}
+  .how-check{font-size:12px;color:#555;display:flex;align-items:flex-start;gap:7px;padding:4px 0;}
+  .how-check svg{width:13px;height:13px;flex-shrink:0;margin-top:1px;}
+  .fairness-note{background:#FFF8EC;border:1px solid #FAC775;border-radius:6px;padding:10px 12px;margin-top:12px;font-size:12px;color:#854F0B;line-height:1.5;}
+
+  /* ── Interview checkboxes ── */
+  .check-lbl{display:flex;align-items:center;gap:7px;font-size:13px;color:#1a1a1a;cursor:pointer;margin-bottom:7px;}
+  input[type=checkbox]{accent-color:#E8A020;width:14px;height:14px;}
+
+  /* ── Review & publish ── */
+  .review-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-bottom:18px;}
+  .review-field .rf-lbl{font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;}
+  .review-field .rf-val{font-size:14px;font-weight:600;color:#1a1a1a;}
+  .transparency-banner{background:#EAF3DE;border:1px solid #C0DD97;border-radius:8px;padding:13px 16px;margin-bottom:18px;display:flex;align-items:flex-start;gap:10px;}
+  .transparency-banner p{font-size:12px;color:#27500A;line-height:1.6;}
+  .review-preview-card{background:#fafafa;border:1px solid #eee;border-radius:8px;padding:16px;margin-bottom:16px;}
+  .publish-actions{display:flex;gap:10px;padding-top:14px;border-top:1px solid #eee;}
+
+  /* ── Buttons ── */
+  .btn{padding:8px 16px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid #ddd;background:#fff;color:#333;font-family:inherit;transition:background .12s,border-color .12s;}
+  .btn:hover{background:#f5f5f5;}
+  .btn-gold{background:#E8A020;border-color:#E8A020;color:#fff;}
+  .btn-gold:hover{background:#d4901a;border-color:#d4901a;}
+  .btn-outline{background:transparent;border-color:#ddd;color:#555;}
+
+  /* ── Footer nav ── */
+  .footer-nav{display:flex;justify-content:space-between;align-items:center;padding:14px 32px;background:#fff;border-top:1px solid #e5e5e5;flex-shrink:0;}
+
+  /* ── Applications sidebar widget ── */
+  .app-item{padding:10px 0;border-bottom:1px solid #f5f5f5;}
+  .app-item:last-child{border-bottom:none;}
+  .app-company{font-size:13px;font-weight:500;color:#1a1a1a;}
+  .app-role{font-size:11px;color:#888;margin-top:1px;}
+  .app-badge{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px;margin-top:5px;}
+  .badge-review{background:#FFF8EC;color:#854F0B;}
+  .badge-interview{background:#EAF3DE;color:#27500A;}
+  .badge-rejected{background:#FCEBEB;color:#A32D2D;}
+  .badge-submitted{background:#f0f0f0;color:#555;}
+  .badge-offer{background:#EAF3DE;color:#27500A;}
+
+  .hidden{display:none!important;}
+
+  /* Step 1 specific */
+  .step1-panels{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px;align-items:start;}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <span class="topbar-logo">WaterlooWorks</span>
+    <div class="topbar-right">
+      <div class="topbar-icon">
+        <svg viewBox="0 0 16 16"><path d="M8 1a5 5 0 100 10A5 5 0 008 1zM2 8a6 6 0 1110.472 4.013L15 14.5l-1 1-2.487-2.528A6 6 0 012 8z" stroke-width="1.2"/></svg>
+      </div>
+      <div class="topbar-icon">
+        <svg viewBox="0 0 16 16"><path d="M8 1.5a5.5 5.5 0 010 11M8 1.5V13M3 4h10M2.5 8h11M3 12h10" stroke-width="1.2"/></svg>
+      </div>
+      <span class="topbar-user">Sara Antoci <span style="color:rgba(255,255,255,0.4);font-size:10px;">▼</span></span>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="nav-item">
+        <svg viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1" stroke-width="1.2"/><rect x="9" y="1" width="6" height="6" rx="1" stroke-width="1.2"/><rect x="1" y="9" width="6" height="6" rx="1" stroke-width="1.2"/><rect x="9" y="9" width="6" height="6" rx="1" stroke-width="1.2"/></svg>
+        Dashboard
+      </div>
+      <div class="nav-item active">
+        <svg viewBox="0 0 16 16"><path d="M2 2h12v12H2z" stroke-width="1.2"/><path d="M5 6h6M5 9h4" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Job Postings
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 16 16"><path d="M2 4h12v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4z" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke-width="1.2"/></svg>
+        Interviews
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 16 16"><path d="M8 2l1.8 3.6L14 6.2l-3 2.9.7 4.1L8 11.1l-3.7 2.1.7-4.1L2 6.2l4.2-.6z" stroke-width="1.2"/></svg>
+        Rankings
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 16 16"><path d="M14 3H2v8h12V3z" stroke-width="1.2"/><path d="M5 14h6M8 11v3" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Messages
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+      <div class="content">
+        <div class="pg-title">Create Job Posting</div>
+        <div class="pg-sub">Create a transparent and fair job posting to attract qualified co-op candidates.</div>
+
+        <!-- Stepper -->
+        <div class="stepper" id="stepper">
+          <div class="st-step">
+            <div class="st-circle active" id="sc1">1</div>
+            <span class="st-lbl active" id="sl1">Job basics</span>
+          </div>
+          <div class="st-line todo" id="line1"></div>
+          <div class="st-step">
+            <div class="st-circle todo" id="sc2">2</div>
+            <span class="st-lbl" id="sl2">Role description</span>
+          </div>
+          <div class="st-line todo" id="line2"></div>
+          <div class="st-step">
+            <div class="st-circle todo" id="sc3">3</div>
+            <span class="st-lbl" id="sl3">Evaluation criteria</span>
+          </div>
+          <div class="st-line todo" id="line3"></div>
+          <div class="st-step">
+            <div class="st-circle todo" id="sc4">4</div>
+            <span class="st-lbl" id="sl4">Interview process</span>
+          </div>
+          <div class="st-line todo" id="line4"></div>
+          <div class="st-step">
+            <div class="st-circle todo" id="sc5">5</div>
+            <span class="st-lbl" id="sl5">Review &amp; publish</span>
+          </div>
+        </div>
+
+        <!-- ═══════════ STEP 1: Job Basics ═══════════ -->
+        <div id="view1">
+          <div class="step1-panels">
+            <div>
+              <div class="card">
+                <div class="card-title">Job basics</div>
+                <div class="card-sub">Fill in the core details of the position.</div>
+                <div class="field-grp">
+                  <label class="field-lbl">Job title <span class="field-req">*</span></label>
+                  <input type="text" placeholder="Software Developer Co-op" value="Software Developer Co-op"/>
+                </div>
+                <div class="field-grp">
+                  <label class="field-lbl">Organization <span class="field-req">*</span></label>
+                  <input type="text" placeholder="Tech Company" value="Tech Company"/>
+                </div>
+                <div class="field-row">
+                  <div class="field-grp">
+                    <label class="field-lbl">Work term <span class="field-req">*</span></label>
+                    <select><option>Summer 2026</option><option>Fall 2026</option><option>Winter 2027</option></select>
+                  </div>
+                  <div class="field-grp">
+                    <label class="field-lbl">Location <span class="field-req">*</span></label>
+                    <input type="text" value="Toronto, ON"/>
+                  </div>
+                </div>
+                <div class="field-grp">
+                  <label class="field-lbl">Work arrangement <span class="field-req">*</span></label>
+                  <select><option>Hybrid</option><option>Remote</option><option>On-site</option></select>
+                </div>
+                <div class="field-row">
+                  <div class="field-grp">
+                    <label class="field-lbl">Number of openings</label>
+                    <input type="text" value="3"/>
+                  </div>
+                  <div class="field-grp">
+                    <label class="field-lbl">Application deadline <span class="field-req">*</span></label>
+                    <input type="text" value="March 25, 2026"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="how-hiring">
+                <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:12px;display:flex;align-items:center;gap:6px;">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#E8A020" stroke-width="1.5"><circle cx="7" cy="7" r="6"/><path d="M7 4v3l2 1" stroke-linecap="round"/></svg>
+                  How hiring works
+                </div>
+                <div class="how-steps">
+                  <div class="how-step"><div class="how-num">1</div><div class="how-lbl">Apply</div></div>
+                  <div class="how-step"><div class="how-num" style="background:#1a1a1a;">2</div><div class="how-lbl">Interview</div></div>
+                  <div class="how-step"><div class="how-num" style="background:#1a1a1a;">3</div><div class="how-lbl">Ranking</div></div>
+                  <div class="how-step"><div class="how-num" style="background:#1a1a1a;">4</div><div class="how-lbl">Match</div></div>
+                </div>
+                <div style="border-top:1px solid #f0f0f0;padding-top:10px;">
+                  <div class="how-check">
+                    <svg viewBox="0 0 13 13" fill="none" stroke="#3B6D11" stroke-width="1.5"><circle cx="6.5" cy="6.5" r="5.5"/><path d="M4 6.5l2 2 3-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span style="font-size:12px;color:#555;">All evaluation criteria are visible before you apply</span>
+                  </div>
+                  <div class="how-check">
+                    <svg viewBox="0 0 13 13" fill="none" stroke="#3B6D11" stroke-width="1.5"><circle cx="6.5" cy="6.5" r="5.5"/><path d="M4 6.5l2 2 3-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span style="font-size:12px;color:#555;">Estimated applicant ranges help you make informed decisions</span>
+                  </div>
+                  <div class="how-check">
+                    <svg viewBox="0 0 13 13" fill="none" stroke="#3B6D11" stroke-width="1.5"><circle cx="6.5" cy="6.5" r="5.5"/><path d="M4 6.5l2 2 3-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span style="font-size:12px;color:#555;">Matching algorithm ensures fair placement based on mutual preferences</span>
+                  </div>
+                </div>
+                <div class="fairness-note">
+                  <strong style="color:#633806;">Fairness statement:</strong> WaterlooWorks is committed to transparency and equal opportunity. All students see the same job information and evaluation criteria.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════ STEP 2: Role Description ═══════════ -->
+        <div id="view2" class="hidden">
+          <div class="panels">
+            <div>
+              <div class="card">
+                <div class="card-title">Role description</div>
+                <div class="card-sub">Clear, specific descriptions attract better-fit candidates and set honest expectations from day one.</div>
+
+                <!-- Guided prompt accordion -->
+                <div style="background:#f9f9f9;border:1px solid #eee;border-radius:6px;padding:12px 14px;margin-bottom:16px;">
+                  <div style="font-size:12px;font-weight:600;color:#1a1a1a;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="#E8A020" stroke-width="1.4"><circle cx="6.5" cy="6.5" r="5.5"/><path d="M6.5 4v2.5l1.5 1" stroke-linecap="round"/></svg>
+                    Writing prompts — answer these to build your description
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:6px;">
+                    <div style="font-size:12px;color:#555;padding:6px 10px;background:#fff;border-radius:4px;border:1px solid #eee;cursor:pointer;" onclick="insertPrompt('What will this student work on day-to-day?')">💬 What will this student work on day-to-day?</div>
+                    <div style="font-size:12px;color:#555;padding:6px 10px;background:#fff;border-radius:4px;border:1px solid #eee;cursor:pointer;" onclick="insertPrompt('What project or team will they join?')">💬 What project or team will they join?</div>
+                    <div style="font-size:12px;color:#555;padding:6px 10px;background:#fff;border-radius:4px;border:1px solid #eee;cursor:pointer;" onclick="insertPrompt('What will they learn or take away from this role?')">💬 What will they learn or take away from this role?</div>
+                    <div style="font-size:12px;color:#555;padding:6px 10px;background:#fff;border-radius:4px;border:1px solid #eee;cursor:pointer;" onclick="insertPrompt('What does success look like after 4 months?')">💬 What does success look like after 4 months?</div>
+                  </div>
+                </div>
+
+                <div class="field-grp">
+                  <label class="field-lbl">Responsibilities <span class="field-req">*</span></label>
+                  <textarea id="resp-area" rows="5" placeholder="Click a prompt above to get started, or write directly here...&#10;&#10;• Describe day-to-day tasks&#10;• Explain projects the student will contribute to&#10;• Mention tools and technologies they'll use"></textarea>
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
+                    <div class="field-hint">Be specific — vague descriptions reduce application quality.</div>
+                    <div style="font-size:11px;color:#aaa;" id="resp-count">0 words</div>
+                  </div>
+                </div>
+
+                <!-- Candidate contact preference — from peer feedback -->
+                <div class="field-grp" style="border-top:1px solid #f0f0f0;padding-top:14px;margin-top:4px;">
+                  <label class="field-lbl">Candidate contact preference</label>
+                  <div style="font-size:12px;color:#777;margin-bottom:8px;line-height:1.5;">Let candidates know how they can reach out with questions before applying. This opens a communication channel and shows openness.</div>
+                  <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px;">
+                    <label class="check-lbl"><input type="radio" name="contact-pref" value="email" style="accent-color:#E8A020;width:14px;height:14px;"/> Allow candidates to email before applying</label>
+                    <label class="check-lbl"><input type="radio" name="contact-pref" value="linkedin"/> Share LinkedIn profile for questions</label>
+                    <label class="check-lbl"><input type="radio" name="contact-pref" value="none" checked/> No direct contact — apply through WaterlooWorks only</label>
+                  </div>
+                  <div id="contact-email-field" style="display:none;">
+                    <input type="text" placeholder="Hiring manager email (e.g., sara@techcompany.com)" style="margin-top:4px;"/>
+                    <div class="field-hint">This email will be visible to students viewing the posting.</div>
+                  </div>
+                  <div id="contact-linkedin-field" style="display:none;">
+                    <input type="text" placeholder="LinkedIn URL" style="margin-top:4px;"/>
+                    <div class="field-hint">Students can message you directly before submitting an application.</div>
+                  </div>
+                </div>
+
+                <div class="field-grp">
+                  <label class="field-lbl">Required skills <span class="field-req">*</span></label>
+                  <div class="tag-add">
+                    <input type="text" id="req-inp" placeholder="Add a skill (e.g., Python, SQL)" style="flex:1;"/>
+                    <button class="btn btn-gold" onclick="addTag('req')">+</button>
+                  </div>
+                  <div class="tag-row" id="req-tags">
+                    <span class="tag">Python <span class="tag-rm" onclick="removeTag(this)">×</span></span>
+                    <span class="tag">SQL <span class="tag-rm" onclick="removeTag(this)">×</span></span>
+                    <span class="tag">JavaScript <span class="tag-rm" onclick="removeTag(this)">×</span></span>
+                  </div>
+                  <div class="field-hint">Essential skills needed to succeed in this role.</div>
+                </div>
+                <div class="field-grp">
+                  <label class="field-lbl">Preferred skills</label>
+                  <div class="tag-add">
+                    <input type="text" id="pref-inp" placeholder="Add a preferred skill" style="flex:1;"/>
+                    <button class="btn btn-gold" onclick="addTag('pref')">+</button>
+                  </div>
+                  <div class="tag-row" id="pref-tags">
+                    <span class="tag">Docker <span class="tag-rm" onclick="removeTag(this)">×</span></span>
+                    <span class="tag">AWS <span class="tag-rm" onclick="removeTag(this)">×</span></span>
+                  </div>
+                  <div class="field-hint">Skills that are nice to have but not required.</div>
+                </div>
+              </div>
+              <div class="tip-box">
+                <div class="tip-title">Fair hiring tip</div>
+                <div class="tip-body">Avoid over-prioritizing GPA. Focus on relevant skills, experiences, and learning potential. A clearer description also helps students self-screen — reducing mismatched applications for both sides.</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="card">
+                <div class="preview-lbl"><span class="preview-dot-grn"></span> Student view preview</div>
+                <div class="preview-sec">
+                  <div class="preview-sec-lbl">Job title</div>
+                  <div style="font-size:14px;font-weight:600;color:#1a1a1a;">Software Developer Co-op</div>
+                </div>
+                <div class="preview-sec">
+                  <div class="preview-sec-lbl">Responsibilities</div>
+                  <div style="font-size:12px;color:#888;font-style:italic;">No responsibilities specified yet.</div>
+                </div>
+                <div class="preview-sec">
+                  <div class="preview-sec-lbl">Required skills</div>
+                  <div class="tag-row"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">JavaScript</span></div>
+                </div>
+                <div class="preview-sec">
+                  <div class="preview-sec-lbl">Preferred skills</div>
+                  <div class="tag-row"><span class="tag">Docker</span><span class="tag">AWS</span></div>
+                </div>
+                <div class="preview-sec">
+                  <div class="preview-sec-lbl">Evaluation criteria</div>
+                  <div class="crit-row"><span class="crit-name">Technical skills</span><div class="crit-track"><div class="crit-fill" style="width:25%"></div></div><span class="crit-pct">25%</span></div>
+                  <div class="crit-row"><span class="crit-name">Experience</span><div class="crit-track"><div class="crit-fill" style="width:25%"></div></div><span class="crit-pct">25%</span></div>
+                  <div class="crit-row"><span class="crit-name">Communication</span><div class="crit-track"><div class="crit-fill" style="width:25%"></div></div><span class="crit-pct">25%</span></div>
+                  <div class="crit-row"><span class="crit-name">Problem solving</span><div class="crit-track"><div class="crit-fill" style="width:25%"></div></div><span class="crit-pct">25%</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════ STEP 3: Evaluation Criteria ═══════════ -->
+        <div id="view3" class="hidden">
+          <div class="panels">
+            <div>
+              <div class="card">
+                <div class="card-title">Candidate evaluation criteria</div>
+                <div class="card-sub">Define how you'll evaluate candidates. Weights are visible to students — keeping your hiring process transparent and accountable. Adjust to total 100%.</div>
+
+                <div class="slider-grp">
+                  <div class="sl-hdr"><span class="sl-name">Technical skills</span><span class="sl-val" id="v1">25%</span></div>
+                  <input type="range" min="0" max="100" step="5" value="25" id="s1" oninput="sync()">
+                </div>
+                <div class="slider-grp">
+                  <div class="sl-hdr"><span class="sl-name">Experience</span><span class="sl-val" id="v2">25%</span></div>
+                  <input type="range" min="0" max="100" step="5" value="25" id="s2" oninput="sync()">
+                </div>
+                <div class="slider-grp">
+                  <div class="sl-hdr"><span class="sl-name">Communication</span><span class="sl-val" id="v3">25%</span></div>
+                  <input type="range" min="0" max="100" step="5" value="25" id="s3" oninput="sync()">
+                </div>
+                <div class="slider-grp">
+                  <div class="sl-hdr"><span class="sl-name">Problem solving</span><span class="sl-val" id="v4">25%</span></div>
+                  <input type="range" min="0" max="100" step="5" value="25" id="s4" oninput="sync()">
+                </div>
+                <div id="extra-sliders"></div>
+
+                <div class="total-row">
+                  <span class="total-lbl">Total weight</span>
+                  <span id="total-val" class="total-ok">100%</span>
+                </div>
+
+                <div style="margin-top:16px;">
+                  <label class="field-lbl">Add custom criterion</label>
+                  <div style="display:flex;gap:8px;">
+                    <input type="text" id="custom-inp" placeholder="e.g., Team collaboration" style="flex:1;"/>
+                    <button class="btn btn-gold" onclick="addCrit()">+ Add</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card tip-box" style="border-color:#FAC775;">
+                <div class="tip-title">Fair hiring best practices</div>
+                <div class="practices">
+                  <div class="practice-item">
+                    <div class="practice-dot"></div>
+                    <div class="practice-text"><strong>Avoid over-reliance on GPA:</strong> Academic performance is just one indicator. Consider projects, experience, and growth potential.</div>
+                  </div>
+                  <div class="practice-item">
+                    <div class="practice-dot"></div>
+                    <div class="practice-text"><strong>Evaluate multiple dimensions:</strong> Use a balanced rubric that assesses various competencies beyond technical skills.</div>
+                  </div>
+                  <div class="practice-item">
+                    <div class="practice-dot"></div>
+                    <div class="practice-text"><strong>Support diverse candidates:</strong> Consider alternative pathways and experiences. Not all strong candidates follow the same journey.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="card">
+                <div class="preview-lbl"><span class="preview-dot-grn"></span> Student view preview</div>
+                <div class="preview-sec">
+                  <div class="preview-sec-lbl">Position</div>
+                  <div style="font-size:14px;font-weight:600;color:#1a1a1a;">Software Developer Co-op</div>
+                  <div style="font-size:11px;color:#888;margin-top:2px;">Tech Company &middot; Toronto, ON &middot; Hybrid</div>
+                </div>
+                <div class="preview-sec">
+                  <div class="preview-sec-lbl">How you'll be evaluated</div>
+                  <div id="preview-crits"></div>
+                </div>
+                <div class="acct-badge">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><circle cx="7" cy="7" r="6" stroke="#3B6D11" stroke-width="1.2"/><path d="M4 7.2l2 2 4-4" stroke="#3B6D11" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <p>Criteria are published to all students before they apply — supporting transparency and equal opportunity.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════ STEP 4: Interview Process ═══════════ -->
+        <div id="view4" class="hidden">
+          <div class="panels">
+            <div>
+              <div class="card">
+                <div class="card-title">Interview process</div>
+                <div class="card-sub">Specific, honest process details help candidates prepare well and signal that your hiring is structured and fair — not a black box.</div>
+                <div class="field-row">
+                  <div class="field-grp">
+                    <label class="field-lbl">Number of interview rounds <span class="field-req">*</span></label>
+                    <select id="rounds-select" onchange="updateRounds()">
+                      <option value="0">Select number of rounds</option>
+                      <option value="1">1 round</option>
+                      <option value="2" selected>2 rounds</option>
+                      <option value="3">3 rounds</option>
+                      <option value="4">4+ rounds</option>
+                    </select>
+                  </div>
+                  <div class="field-grp">
+                    <label class="field-lbl">Decision timeline <span class="field-req">*</span></label>
+                    <select>
+                      <option>Within 1 week</option>
+                      <option>Within 2 weeks</option>
+                      <option>Within 3 days</option>
+                      <option>Same day</option>
+                    </select>
+                    <div class="field-hint">Students rely on this to manage competing offers.</div>
+                  </div>
+                </div>
+
+                <!-- Per-round breakdown -->
+                <div id="rounds-breakdown" style="margin-bottom:14px;">
+                  <div style="font-size:12px;font-weight:600;color:#1a1a1a;margin-bottom:10px;display:flex;align-items:center;gap:6px;">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="#E8A020" stroke-width="1.4"><rect x="1" y="1" width="11" height="11" rx="2"/><path d="M4 6.5h5M6.5 4v5" stroke-linecap="round"/></svg>
+                    Round-by-round breakdown
+                    <span style="font-size:11px;font-weight:400;color:#aaa;">— describe each round so candidates know what to prepare</span>
+                  </div>
+                  <div id="round-items"></div>
+                </div>
+
+                <div class="field-grp">
+                  <label class="field-lbl">Interview format <span class="field-req">*</span></label>
+                  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                    <label class="check-lbl"><input type="checkbox" checked/> Virtual / Video</label>
+                    <label class="check-lbl"><input type="checkbox"/> In-person</label>
+                    <label class="check-lbl"><input type="checkbox"/> Phone</label>
+                  </div>
+                </div>
+
+                <div class="field-row">
+                  <div class="field-grp">
+                    <label class="field-lbl">Estimated duration (per interview)</label>
+                    <select>
+                      <option>30 minutes</option>
+                      <option selected>45 minutes</option>
+                      <option>60 minutes</option>
+                      <option>90 minutes</option>
+                    </select>
+                  </div>
+                  <div class="field-grp">
+                    <label class="field-lbl">Who will be interviewing?</label>
+                    <input type="text" placeholder="e.g., Hiring Manager + Team Lead"/>
+                    <div class="field-hint">Helps candidates understand the seniority and context.</div>
+                  </div>
+                </div>
+
+                <!-- Feedback commitment — from peer feedback -->
+                <div style="border-top:1px solid #f0f0f0;padding-top:14px;margin-top:4px;margin-bottom:14px;">
+                  <div style="font-size:12px;font-weight:600;color:#1a1a1a;margin-bottom:6px;display:flex;align-items:center;gap:6px;">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="#185FA5" stroke-width="1.4"><path d="M2 2h9v7H2z"/><path d="M4 9l1 2h3l1-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Candidate feedback commitment
+                  </div>
+                  <div style="font-size:12px;color:#777;margin-bottom:8px;line-height:1.5;">Will you provide feedback to unsuccessful candidates? This is a key part of accountability — students benefit greatly from understanding why they weren't selected.</div>
+                  <div style="display:flex;flex-direction:column;gap:6px;">
+                    <label class="check-lbl"><input type="radio" name="feedback-pref" value="all" style="accent-color:#E8A020;width:14px;height:14px;"/> Yes — I'll provide feedback to all interviewed candidates</label>
+                    <label class="check-lbl"><input type="radio" name="feedback-pref" value="request"/> Yes — on request after the decision</label>
+                    <label class="check-lbl"><input type="radio" name="feedback-pref" value="none" checked/> No feedback provided</label>
+                  </div>
+                  <div id="feedback-note" style="display:none;margin-top:8px;background:#E6F1FB;border:1px solid #B5D4F4;border-radius:6px;padding:8px 12px;font-size:12px;color:#0C447C;line-height:1.5;">
+                    Providing feedback improves your employer reputation and the quality of future applicants. Students remember employers who invest in their growth.
+                  </div>
+                </div>
+
+                <div class="field-grp">
+                  <label class="field-lbl">Additional process notes</label>
+                  <textarea rows="3" placeholder="Any other details candidates should know — e.g., 'First round is a 30-min culture fit call. Second round includes a 1-hour technical take-home.'"></textarea>
+                </div>
+              </div>
+              <div class="tip-box">
+                <div class="tip-title">Accountability tip</div>
+                <div class="tip-body">The more specific your process description, the more seriously candidates can prepare — and the better your interviews will go. Employers who commit to feedback see stronger application pools over time.</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="card">
+                <div class="preview-lbl"><span class="preview-dot-grn"></span> What students will see</div>
+                <div class="preview-sec">
+                  <div class="preview-sec-lbl">Interview process</div>
+                  <div style="font-size:12px;color:#333;line-height:1.6;">
+                    <div style="display:flex;gap:8px;margin-bottom:5px;"><span style="color:#aaa;width:80px;flex-shrink:0;">Format</span><span>Virtual / Video</span></div>
+                    <div style="display:flex;gap:8px;margin-bottom:5px;"><span style="color:#aaa;width:80px;flex-shrink:0;">Rounds</span><span>2 rounds</span></div>
+                    <div style="display:flex;gap:8px;margin-bottom:5px;"><span style="color:#aaa;width:80px;flex-shrink:0;">Duration</span><span>~45 min each</span></div>
+                    <div style="display:flex;gap:8px;"><span style="color:#aaa;width:80px;flex-shrink:0;">Decision</span><span>Within 1 week</span></div>
+                  </div>
+                </div>
+                <div class="acct-badge" style="margin-top:14px;">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><circle cx="7" cy="7" r="6" stroke="#3B6D11" stroke-width="1.2"/><path d="M4 7.2l2 2 4-4" stroke="#3B6D11" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <p>Process details are shown to students before applying — promoting informed decisions and fair competition.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════ STEP 5: Review & Publish ═══════════ -->
+        <div id="view5" class="hidden">
+          <div class="transparency-banner">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:2px;"><circle cx="8" cy="8" r="7" stroke="#3B6D11" stroke-width="1.3"/><path d="M5 8.5l2.5 2.5 4.5-5" stroke="#3B6D11" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <p><strong style="color:#27500A;">Student transparency preview</strong> — This is exactly what students see when viewing your posting. Transparency builds trust and attracts stronger, more qualified candidates.</p>
+          </div>
+
+          <div class="panels">
+            <!-- Left: student preview + review & publish -->
+            <div>
+              <div class="review-preview-card">
+                <div style="font-size:16px;font-weight:600;color:#1a1a1a;margin-bottom:2px;">Software Developer Co-op</div>
+                <div style="font-size:12px;color:#888;margin-bottom:14px;">Tech Company &middot; Toronto, ON &middot; Hybrid &middot; Summer 2026</div>
+
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#aaa;font-weight:600;margin-bottom:5px;">Responsibilities</div>
+                <div style="font-size:12px;color:#555;margin-bottom:12px;line-height:1.5;">No responsibilities specified yet.</div>
+
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#aaa;font-weight:600;margin-bottom:6px;">Evaluation criteria</div>
+                <div id="review-crits"></div>
+                <div style="display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid #eee;margin-top:4px;">
+                  <span style="font-size:12px;font-weight:600;color:#1a1a1a;">Total weight</span>
+                  <span style="font-size:12px;font-weight:600;background:#1a1a1a;color:#fff;padding:2px 10px;border-radius:999px;">100%</span>
+                </div>
+
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#aaa;font-weight:600;margin:12px 0 5px;">Interview process</div>
+                <div style="font-size:12px;color:#555;">2 rounds &middot; Virtual / Video &middot; ~45 min each &middot; Decision within 1 week</div>
+              </div>
+
+              <div class="card">
+                <div class="card-title" style="margin-bottom:16px;">Review &amp; publish</div>
+                <div class="review-grid">
+                  <div class="review-field"><div class="rf-lbl">Job title</div><div class="rf-val">Software Developer Co-op</div></div>
+                  <div class="review-field"><div class="rf-lbl">Organization</div><div class="rf-val">Tech Company</div></div>
+                  <div class="review-field"><div class="rf-lbl">Work term</div><div class="rf-val">Summer 2026</div></div>
+                  <div class="review-field"><div class="rf-lbl">Location</div><div class="rf-val">Toronto, ON</div></div>
+                  <div class="review-field"><div class="rf-lbl">Work arrangement</div><div class="rf-val">Hybrid</div></div>
+                  <div class="review-field"><div class="rf-lbl">Interview rounds</div><div class="rf-val">2 rounds</div></div>
+                </div>
+                <div class="publish-actions">
+                  <button class="btn btn-outline">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.3" style="vertical-align:-2px;margin-right:4px;"><path d="M2 9V11h9V9M6.5 2v7M4 5l2.5-3 2.5 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Save draft
+                  </button>
+                  <button class="btn btn-outline">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.3" style="vertical-align:-2px;margin-right:4px;"><circle cx="6.5" cy="6.5" r="5"/><path d="M4 6.5a2.5 2.5 0 005 0" stroke-linecap="round"/></svg>
+                    Preview posting
+                  </button>
+                  <button class="btn btn-gold">
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="#fff" stroke-width="1.3" style="vertical-align:-2px;margin-right:4px;"><path d="M2 7l3.5 3.5 6-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Publish job
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Transparency & Competence panel -->
+            <div>
+
+              <!-- Posting health score -->
+              <div class="card" style="margin-bottom:16px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                  <div style="font-size:13px;font-weight:600;color:#1a1a1a;">Posting quality score</div>
+                  <div style="background:#EAF3DE;color:#27500A;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;">Strong</div>
+                </div>
+
+                <div style="display:flex;gap:10px;margin-bottom:14px;">
+                  <!-- Transparency score -->
+                  <div style="flex:1;background:#f9f9f9;border:1px solid #eee;border-radius:8px;padding:12px;text-align:center;">
+                    <div style="position:relative;width:56px;height:56px;margin:0 auto 8px;">
+                      <svg viewBox="0 0 56 56" width="56" height="56">
+                        <circle cx="28" cy="28" r="24" fill="none" stroke="#eee" stroke-width="5"/>
+                        <circle cx="28" cy="28" r="24" fill="none" stroke="#E8A020" stroke-width="5"
+                          stroke-dasharray="150.796" stroke-dashoffset="22.6" stroke-linecap="round"
+                          transform="rotate(-90 28 28)"/>
+                      </svg>
+                      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#1a1a1a;">85%</div>
+                    </div>
+                    <div style="font-size:11px;font-weight:600;color:#1a1a1a;margin-bottom:2px;">Transparency</div>
+                    <div style="font-size:11px;color:#888;">Criteria visible to students</div>
+                  </div>
+                  <!-- Competence score -->
+                  <div style="flex:1;background:#f9f9f9;border:1px solid #eee;border-radius:8px;padding:12px;text-align:center;">
+                    <div style="position:relative;width:56px;height:56px;margin:0 auto 8px;">
+                      <svg viewBox="0 0 56 56" width="56" height="56">
+                        <circle cx="28" cy="28" r="24" fill="none" stroke="#eee" stroke-width="5"/>
+                        <circle cx="28" cy="28" r="24" fill="none" stroke="#3B6D11" stroke-width="5"
+                          stroke-dasharray="150.796" stroke-dashoffset="30.1" stroke-linecap="round"
+                          transform="rotate(-90 28 28)"/>
+                      </svg>
+                      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#1a1a1a;">80%</div>
+                    </div>
+                    <div style="font-size:11px;font-weight:600;color:#1a1a1a;margin-bottom:2px;">Competence</div>
+                    <div style="font-size:11px;color:#888;">Multi-criteria evaluation</div>
+                  </div>
+                </div>
+
+                <!-- Score breakdown rows -->
+                <div style="border-top:1px solid #f0f0f0;padding-top:12px;">
+                  <div style="font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">What makes this posting strong</div>
+
+                  <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><circle cx="7" cy="7" r="6" fill="#EAF3DE"/><path d="M4 7.2l2 2 4-4" stroke="#3B6D11" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div style="font-size:12px;color:#333;line-height:1.4;">Evaluation weights are <strong>published to students</strong> before they apply</div>
+                  </div>
+                  <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><circle cx="7" cy="7" r="6" fill="#EAF3DE"/><path d="M4 7.2l2 2 4-4" stroke="#3B6D11" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div style="font-size:12px;color:#333;line-height:1.4;"><strong>4 criteria</strong> assessed — reduces single-metric bias</div>
+                  </div>
+                  <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><circle cx="7" cy="7" r="6" fill="#EAF3DE"/><path d="M4 7.2l2 2 4-4" stroke="#3B6D11" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div style="font-size:12px;color:#333;line-height:1.4;">Interview structure and <strong>timeline disclosed</strong> upfront</div>
+                  </div>
+                  <div style="display:flex;align-items:flex-start;gap:8px;">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;"><circle cx="7" cy="7" r="6" fill="#FFF8EC" stroke="#FAC775" stroke-width="1"/><path d="M7 4.5v3M7 9h.01" stroke="#854F0B" stroke-width="1.3" stroke-linecap="round"/></svg>
+                    <div style="font-size:12px;color:#854F0B;line-height:1.4;">Add responsibilities to reach a <strong>perfect score</strong></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Transparency checklist -->
+              <div class="card" style="margin-bottom:16px;">
+                <div style="display:flex;align-items:center;gap:7px;margin-bottom:12px;">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#185FA5" stroke-width="1.2"/><path d="M4.5 7l1.5 1.5 3.5-3.5" stroke="#185FA5" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <div style="font-size:13px;font-weight:600;color:#1a1a1a;">Transparency checklist</div>
+                </div>
+                <div style="font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-bottom:8px;">What students can see</div>
+                <div style="display:flex;flex-direction:column;gap:7px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;">
+                    <span style="color:#333;">Evaluation criteria &amp; weights</span>
+                    <span style="background:#EAF3DE;color:#27500A;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;">Visible</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;">
+                    <span style="color:#333;">Interview format &amp; rounds</span>
+                    <span style="background:#EAF3DE;color:#27500A;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;">Visible</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;">
+                    <span style="color:#333;">Decision timeline</span>
+                    <span style="background:#EAF3DE;color:#27500A;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;">Visible</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;">
+                    <span style="color:#333;">Required vs. preferred skills</span>
+                    <span style="background:#EAF3DE;color:#27500A;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;">Visible</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;">
+                    <span style="color:#333;">Role responsibilities</span>
+                    <span style="background:#FFF8EC;color:#854F0B;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;">Missing</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Competence signal -->
+              <div class="card" style="background:#FAFAFA;">
+                <div style="display:flex;align-items:center;gap:7px;margin-bottom:10px;">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1l1.6 3.2 3.4.5-2.5 2.4.6 3.4L7 9l-3.1 1.5.6-3.4L2 4.7l3.4-.5z" stroke="#E8A020" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                  <div style="font-size:13px;font-weight:600;color:#1a1a1a;">Competence signal to candidates</div>
+                </div>
+                <div style="font-size:12px;color:#555;line-height:1.6;margin-bottom:10px;">This posting uses a <strong style="color:#1a1a1a;">structured, multi-criteria evaluation</strong> — signalling to candidates that your hiring decisions are based on merit, not gut feel.</div>
+                <div style="background:#fff;border:1px solid #eee;border-radius:6px;padding:10px 12px;">
+                  <div style="font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-bottom:6px;">Criteria balance</div>
+                  <div style="display:flex;gap:4px;height:8px;border-radius:4px;overflow:hidden;margin-bottom:6px;">
+                    <div style="flex:25;background:#E8A020;"></div>
+                    <div style="flex:25;background:#3B6D11;"></div>
+                    <div style="flex:25;background:#185FA5;"></div>
+                    <div style="flex:25;background:#854F0B;"></div>
+                  </div>
+                  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <span style="font-size:11px;color:#555;display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:2px;background:#E8A020;display:inline-block;"></span>Technical 25%</span>
+                    <span style="font-size:11px;color:#555;display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:2px;background:#3B6D11;display:inline-block;"></span>Experience 25%</span>
+                    <span style="font-size:11px;color:#555;display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:2px;background:#185FA5;display:inline-block;"></span>Communication 25%</span>
+                    <span style="font-size:11px;color:#555;display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:2px;background:#854F0B;display:inline-block;"></span>Problem Solving 25%</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+
+      <!-- Footer nav -->
+      <div class="footer-nav">
+        <button class="btn btn-outline" onclick="prev()" id="prev-btn" style="display:none;">&#8592; Previous</button>
+        <div></div>
+        <button class="btn btn-gold" id="next-btn" onclick="next()">Next &#8594;</button>
+      </div>
+    </div><!-- /main -->
+  </div><!-- /body -->
+</div><!-- /shell -->
+
+<script>
+var cur = 1;
+var total = 5;
+
+var crits = [
+  {id:'s1',vid:'v1',name:'Technical skills',val:25},
+  {id:'s2',vid:'v2',name:'Experience',val:25},
+  {id:'s3',vid:'v3',name:'Communication',val:25},
+  {id:'s4',vid:'v4',name:'Problem solving',val:25}
+];
+var extraCount = 0;
+
+function checkSVG(color){
+  return '<svg viewBox="0 0 13 13" fill="none" width="13" height="13"><circle cx="6.5" cy="6.5" r="5.5" fill="'+color+'"/><path d="M4 6.5l2 2 3.5-3.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+}
+
+function updateStepper(){
+  for(var i=1;i<=total;i++){
+    var sc = document.getElementById('sc'+i);
+    var sl = document.getElementById('sl'+i);
+    if(!sc) continue;
+    if(i < cur){
+      sc.className='st-circle done';
+      sc.innerHTML=checkSVG('#E8A020');
+    } else if(i === cur){
+      sc.className='st-circle active';
+      sc.textContent=i;
+    } else {
+      sc.className='st-circle todo';
+      sc.textContent=i;
+    }
+    if(sl) sl.className='st-lbl'+(i===cur?' active':'');
+  }
+  for(var j=1;j<total;j++){
+    var ln = document.getElementById('line'+j);
+    if(ln) ln.className='st-line'+(j<cur?' done':' todo');
+  }
+}
+
+function showViews(){
+  for(var i=1;i<=total;i++){
+    var v = document.getElementById('view'+i);
+    if(v) v.className = i===cur?'':'hidden';
+  }
+  var nb = document.getElementById('next-btn');
+  var pb = document.getElementById('prev-btn');
+  if(nb) nb.textContent = cur===total ? 'Publish' : 'Next \u2192';
+  if(pb) pb.style.display = cur>1 ? 'inline-flex' : 'none';
+}
+
+function next(){
+  if(cur<total){ cur++; updateStepper(); showViews(); }
+}
+function prev(){
+  if(cur>1){ cur--; updateStepper(); showViews(); }
+}
+
+function sync(){
+  crits.forEach(function(c){
+    var el=document.getElementById(c.id);
+    if(el) c.val=parseInt(el.value);
+    var vl=document.getElementById(c.vid);
+    if(vl) vl.textContent=c.val+'%';
+  });
+  var tot=crits.reduce(function(a,b){return a+b.val;},0);
+  var tv=document.getElementById('total-val');
+  if(tv){ tv.textContent=tot+'%'; tv.className=tot===100?'total-ok':'total-warn'; }
+  renderCrits();
+}
+
+function renderCrits(){
+  ['preview-crits','review-crits'].forEach(function(eid){
+    var el=document.getElementById(eid);
+    if(!el) return;
+    el.innerHTML=crits.map(function(c){
+      return '<div class="crit-row"><span class="crit-name">'+c.name+'</span><div class="crit-track"><div class="crit-fill" style="width:'+c.val+'%"></div></div><span class="crit-pct">'+c.val+'%</span></div>';
+    }).join('');
+  });
+}
+
+function addCrit(){
+  var inp=document.getElementById('custom-inp');
+  var name=inp?inp.value.trim():'';
+  if(!name) return;
+  extraCount++;
+  var sid='sx'+extraCount; var vid='vx'+extraCount;
+  crits.push({id:sid,vid:vid,name:name,val:0});
+  var wrap=document.getElementById('extra-sliders');
+  if(wrap){
+    var div=document.createElement('div');
+    div.className='slider-grp';
+    div.innerHTML='<div class="sl-hdr"><span class="sl-name">'+name+'</span><span class="sl-val" id="'+vid+'">0%</span></div><input type="range" min="0" max="100" step="5" value="0" id="'+sid+'" oninput="sync()">';
+    wrap.appendChild(div);
+  }
+  if(inp) inp.value='';
+  sync();
+}
+
+function addTag(type){
+  var inp=document.getElementById(type+'-inp');
+  var val=inp?inp.value.trim():'';
+  if(!val) return;
+  var row=document.getElementById(type+'-tags');
+  if(row){
+    var span=document.createElement('span');
+    span.className='tag';
+    span.innerHTML=val+' <span class="tag-rm" onclick="removeTag(this)">×</span>';
+    row.appendChild(span);
+  }
+  if(inp) inp.value='';
+}
+
+function removeTag(el){
+  el.parentElement.remove();
+}
+
+renderCrits();
+updateStepper();
+showViews();
+
+function insertPrompt(text){
+  var ta = document.getElementById('resp-area');
+  if(!ta) return;
+  var cur = ta.value.trim();
+  ta.value = cur ? cur + '\n\n• ' + text + ' ' : '• ' + text + ' ';
+  ta.focus();
+  updateWordCount();
+}
+
+function updateWordCount(){
+  var ta = document.getElementById('resp-area');
+  var rc = document.getElementById('resp-count');
+  if(!ta || !rc) return;
+  var words = ta.value.trim().split(/\s+/).filter(function(w){return w.length>0;});
+  rc.textContent = words.length + ' word' + (words.length===1?'':'s');
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  var ta = document.getElementById('resp-area');
+  if(ta) ta.addEventListener('input', updateWordCount);
+
+  var radios = document.querySelectorAll('input[name="contact-pref"]');
+  radios.forEach(function(r){
+    r.addEventListener('change', function(){
+      document.getElementById('contact-email-field').style.display = this.value==='email'?'block':'none';
+      document.getElementById('contact-linkedin-field').style.display = this.value==='linkedin'?'block':'none';
+    });
+  });
+
+  var fbRadios = document.querySelectorAll('input[name="feedback-pref"]');
+  fbRadios.forEach(function(r){
+    r.addEventListener('change', function(){
+      var note = document.getElementById('feedback-note');
+      if(note) note.style.display = (this.value==='all'||this.value==='request') ? 'block' : 'none';
+    });
+  });
+
+  updateRounds();
+});
+
+var roundTypes = ['Culture fit / behavioural', 'Technical assessment', 'Take-home assignment', 'Panel interview', 'Case study'];
+
+function updateRounds(){
+  var sel = document.getElementById('rounds-select');
+  var container = document.getElementById('round-items');
+  if(!sel || !container) return;
+  var n = parseInt(sel.value) || 0;
+  container.innerHTML = '';
+  if(n === 0) return;
+  for(var i=1; i<=Math.min(n,4); i++){
+    var div = document.createElement('div');
+    div.style.cssText = 'border:1px solid #eee;border-radius:6px;padding:12px 14px;margin-bottom:8px;background:#fafafa;';
+    var typeOpts = roundTypes.map(function(t,idx){
+      return '<option'+(idx===i-1?' selected':'')+'>'+t+'</option>';
+    }).join('');
+    div.innerHTML =
+      '<div style="font-size:12px;font-weight:600;color:#E8A020;margin-bottom:8px;">Round '+i+'</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">'+
+        '<div>'+
+          '<div style="font-size:11px;color:#555;font-weight:500;margin-bottom:4px;">Type</div>'+
+          '<select style="width:100%;font-size:12px;">'+typeOpts+'</select>'+
+        '</div>'+
+        '<div>'+
+          '<div style="font-size:11px;color:#555;font-weight:500;margin-bottom:4px;">Duration</div>'+
+          '<select style="width:100%;font-size:12px;"><option>30 min</option><option selected>45 min</option><option>60 min</option><option>90 min</option></select>'+
+        '</div>'+
+      '</div>'+
+      '<div style="margin-top:8px;">'+
+        '<div style="font-size:11px;color:#555;font-weight:500;margin-bottom:4px;">What to expect in this round</div>'+
+        '<input type="text" placeholder="e.g., Two LeetCode-style problems, whiteboard coding in Python" style="width:100%;font-size:12px;"/>'+
+      '</div>';
+    container.appendChild(div);
+  }
+}
+</script>
+</body>
+</html>

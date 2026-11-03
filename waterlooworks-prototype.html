@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WaterlooWorks Prototype · Annora Zhu</title>
+  <meta name="description" content="Interactive prototype of a redesigned WaterlooWorks employer flow: a guided job posting with transparent evaluation criteria and fair-hiring prompts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preload" href="danxingshu-subset.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=202611030150">
+  <link rel="stylesheet" href="case.css?v=202611030150">
+  <style>
+    /* a desktop browser window, scaled down to fit — the prototype is a 1280px-wide web app */
+    .win { margin-top: 36px; border-radius: 10px; overflow: hidden; border: 1px solid var(--rule); background: var(--paper-3); box-shadow: 0 40px 80px -40px rgba(35,31,28,.45); }
+    .win-top { display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: var(--paper-2); border-bottom: 1px solid var(--rule); }
+    .win-top i { width: 11px; height: 11px; border-radius: 50%; background: #d3c8b6; display: inline-block; margin-right: 6px; }
+    .win-top span { font: 500 12px var(--mono); color: var(--ink-3); }
+    .win-top a { margin-left: auto; font: 500 12px var(--mono); color: var(--ink-2); border-bottom: 1px solid var(--rule); }
+    .win-view { position: relative; overflow: hidden; height: calc(var(--s, 1) * 820px); }
+    .win-view iframe { position: absolute; left: 0; top: 0; width: 1280px; height: 820px; border: 0; transform: scale(var(--s, 1)); transform-origin: 0 0; }
+    .try { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
+    .try .cs-card h4 { margin-bottom: 10px; }
+    .try p { font: 300 15px/1.55 var(--sans); color: var(--ink-2); }
+    @media (max-width: 900px) { .try { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .try { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="index.html"><span class="dx">朱</span><span class="name-en">Annora Zhu</span></a>
+  <ul class="tabs">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html" aria-current="page">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="lens.html">Lens</a></li>
+  </ul>
+  <a class="btn" href="#hello">Say hi</a>
+</nav>
+
+<main class="cs">
+
+<section style="padding-top:clamp(130px,16vw,180px)">
+  <p class="mono eyebrow">Interactive prototype · WaterlooWorks · UX redesign</p>
+  <h1 style="font-size:clamp(48px,6.4vw,92px);max-width:13em">A fairer job posting, <em>one step at a time</em>.</h1>
+  <p class="cs-text">A full redesign of the employer side of WaterlooWorks: a guided, multi-step form with transparent evaluation criteria, fair-hiring prompts and a live preview of what students will see. Fill it in the way an employer would — everything below is clickable.</p>
+
+  <div class="win">
+    <div class="win-top"><span><i></i><i></i><i></i></span><span>Prototype · Create job posting</span><a href="waterlooworks-app.html" target="_blank" rel="noopener">Open full screen ↗</a></div>
+    <div class="win-view" id="winView"><iframe src="waterlooworks-app.html" title="WaterlooWorks job posting prototype"></iframe></div>
+  </div>
+  <p class="cs-note">Best on a laptop or desktop — it's an employer tool, built at desktop size and scaled to fit here.</p>
+</section>
+
+<section>
+  <p class="cs-num">What to try</p>
+  <h2>Four steps, each one making the posting more honest.</h2>
+  <div class="try">
+    <div class="cs-card"><h4>1 · Job basics</h4><p>The essentials up front, with a fair-hiring tip beside the form instead of buried in a policy page.</p></div>
+    <div class="cs-card"><h4>2 · Role description</h4><p>Write the role while a student-view preview updates next to it — employers see their posting the way applicants will.</p></div>
+    <div class="cs-card"><h4>3 · Evaluation criteria</h4><p>Weight each criterion with sliders that have to add up to 100%, so students know exactly how they'll be judged — and GPA isn't the only thing that counts.</p></div>
+    <div class="cs-card"><h4>4 · Interview process</h4><p>Set the interview steps and commit to giving feedback to candidates who don't get the role.</p></div>
+  </div>
+</section>
+
+</main>
+
+<a class="back-float" href="work.html">← All work</a>
+
+<footer class="footer" id="hello">
+  <div class="stamp-zone" id="stampZone">
+    <p class="mono eyebrow">Say hi</p>
+    <h2>Have a product that needs a listener?</h2>
+    <div class="links">
+      <a href="mailto:y65zhu@uwaterloo.ca">y65zhu@uwaterloo.ca</a>
+      <a href="https://www.linkedin.com/in/annora-zhu-1355352b9">LinkedIn ↗</a>
+      <a href="https://www.instagram.com/zz_annora">Instagram ↗</a>
+    </div>
+    <figure class="signature">
+      <div class="sig-row"><span class="sig dx">朱硯潤</span><span class="sig-seal" data-seal="96"></span></div>
+      <figcaption><span class="mono sig-roman">ZHŪ YÀNRÙN</span><span class="sig-note">My name, signed and sealed — the way a painter finishes a painting.</span></figcaption>
+    </figure>
+    <p class="mono stamp-hint" id="stampHint">Click anywhere in here to leave your own seal.</p>
+  </div>
+  <div class="footer-ink" data-ink="ridge" data-seed="12" aria-hidden="true"></div>
+  <div class="fine mono"><span>© 2026 Annora Zhu</span><span>Hand-coded in Waterloo</span></div>
+</footer>
+
+<script src="main.js?v=202611030150"></script>
+<script src="ink.js?v=202611030150"></script>
+<script>
+  // scale the 1280px-wide prototype to whatever width the window has
+  const view = document.getElementById('winView');
+  const fit = () => view.style.setProperty('--s', Math.min(1, view.clientWidth / 1280));
+  fit();
+  addEventListener('resize', fit);
+  new ResizeObserver(fit).observe(view);
+</script>
+</body>
+</html>

@@ -57,8 +57,8 @@
         'Employers get a faster, clearer flow; students get postings that are more honest and more equitable.'
       ],
       meta: [['Role', 'UX · Interaction · Prototype']],
-      links: [['Open the prototype', OLD + 'waterlooworks.html']],
-      media: [{ iframe: OLD + 'waterlooworks.html', ar: '16/10', cap: 'Live prototype', wide: true }]
+      links: [['Try the prototype', 'waterlooworks-prototype.html']],
+      media: []
     },
     {
       id: 'tryon', cat: 'product', title: 'TryOn Buddy', tab: 'AI fashion app',
