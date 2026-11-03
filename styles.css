@@ -414,7 +414,7 @@ section { padding: clamp(100px, 13vw, 170px) var(--gutter) 0; position: relative
   .pcard .open { opacity: 1; transform: none; }
   .d-gallery { columns: 1; }
   .table { height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .stamp { position: relative; left: auto; top: auto; width: auto; translate: none !important; }
+  .stamp { position: relative; left: auto; top: auto; width: auto; translate: none !important; touch-action: auto; cursor: zoom-in; }
   .stamp.land { grid-column: span 2; }
   .rug-stage { height: 620px; }
   .file { width: 96px; }
@@ -423,6 +423,12 @@ section { padding: clamp(100px, 13vw, 170px) var(--gutter) 0; position: relative
   .footer-ink { height: 110px; }
 }
 @media (max-width: 520px) {
+  /* name cards: taller and tighter on the back so the meaning fits */
+  .chars { gap: 10px; }
+  .char { width: calc((100vw - 2 * var(--gutter) - 20px) / 3); aspect-ratio: 3/5; }
+  .char .back { padding: 10px 8px; gap: 6px; justify-content: flex-start; padding-top: 16px; }
+  .char .back strong { font-size: 18px; }
+  .char .back span { font-size: 12px; line-height: 1.4; }
   .tabs a { padding: 6px 8px; font-size: 13px; }
   .badges { grid-template-columns: repeat(2, 1fr); }
   .facts { grid-template-columns: 1fr; }
