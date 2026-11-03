@@ -1,0 +1,51 @@
+/* Shared layout for the long-form case study pages. */
+.cs { max-width: 1180px; margin: 0 auto; }
+.cs section { padding-left: var(--gutter); padding-right: var(--gutter); padding-top: clamp(72px, 9vw, 120px); }
+.cs-hero { padding-top: clamp(130px, 16vw, 180px) !important; display: grid; grid-template-columns: 1.25fr .75fr; gap: clamp(28px, 5vw, 72px); align-items: end; }
+.cs-hero h1 { font-size: clamp(48px, 6.4vw, 96px); }
+.cs-hero .lead { margin-top: 24px; }
+.cs-hero figure { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cs-hero img { width: 100%; aspect-ratio: 9/19; object-fit: cover; border-radius: 18px; border: 1px solid var(--rule); }
+.cs-facts { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-top: 48px; }
+.cs-facts div { padding: 22px 20px; border-left: 1px solid var(--rule); }
+.cs-facts div:first-child { border-left: 0; padding-left: 0; }
+.cs-facts strong { display: block; font: 400 clamp(30px, 3.4vw, 44px)/1 var(--display); }
+.cs-facts span { display: block; margin-top: 8px; font: 300 15px/1.45 var(--sans); color: var(--ink-2); }
+.cs-num { font: 500 13px var(--mono); color: var(--zhu); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+.cs h2 { max-width: 18em; }
+.cs-text { max-width: 44em; margin-top: 22px; font: 300 18px/1.65 var(--sans); color: var(--ink-2); }
+.cs-text strong { color: var(--ink); font-weight: 500; }
+.cs-table-wrap { margin-top: 32px; overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper-3); }
+.cs table { width: 100%; border-collapse: collapse; font: 400 15px/1.45 var(--sans); min-width: 720px; }
+.cs th { text-align: left; font: 500 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); padding: 14px 16px; border-bottom: 1px solid var(--rule); background: var(--paper-2); white-space: nowrap; }
+.cs td { padding: 13px 16px; border-bottom: 1px solid var(--rule); vertical-align: top; color: var(--ink-2); }
+.cs tr:last-child td { border-bottom: 0; }
+.cs td:first-child { color: var(--ink); font-weight: 500; white-space: nowrap; }
+.cs td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cs tr.us td { background: color-mix(in srgb, var(--zhu) 7%, transparent); }
+.cs tr.us td:first-child { color: var(--zhu); }
+.cs-note { margin-top: 12px; font: 400 13px/1.5 var(--mono); color: var(--ink-3); }
+.cs-note a { border-bottom: 1px solid var(--rule); }
+.cs-two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+.cs-two > *, .cs-hero > *, .cs section { min-width: 0; }
+.cs-card { border: 1px solid var(--rule); border-radius: 6px; background: var(--paper-3); padding: 24px; }
+.cs-card h4 { font: 500 13px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 18px; }
+.bars { display: grid; gap: 12px; }
+.bar { display: grid; grid-template-columns: 110px 1fr 70px; align-items: center; gap: 12px; font: 400 14px var(--sans); }
+.bar i { display: block; height: 14px; border-radius: 2px; background: var(--ink-3); width: var(--w); }
+.bar.hi i { background: var(--zhu); }
+.bar b { font: 500 13px var(--mono); text-align: right; font-weight: 500; }
+.map svg { width: 100%; height: auto; display: block; }
+.cs-quote { margin-top: 32px; padding: 26px 30px; border-left: 3px solid var(--zhu); background: var(--paper-3); font: 400 clamp(20px, 2vw, 26px)/1.4 var(--display); max-width: 36em; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font: 500 12px var(--mono); border: 1px solid var(--rule); color: var(--ink-2); white-space: nowrap; }
+.tag.free { border-color: #9cbf9f; color: #3f6b45; }
+.tag.plus { border-color: var(--zhu); color: var(--zhu); }
+.tag.plan { border-color: #c8b48a; color: #7a6230; }
+.cs-back { display: inline-block; margin-top: 28px; }
+@media (max-width: 900px) {
+  .cs-hero, .cs-two { grid-template-columns: 1fr; }
+  .cs-hero figure { max-width: 360px; }
+  .cs-facts { grid-template-columns: 1fr 1fr; }
+  .cs-facts div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .bar { grid-template-columns: 92px 1fr 60px; }
+}

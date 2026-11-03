@@ -137,6 +137,11 @@ section { padding: clamp(100px, 13vw, 170px) var(--gutter) 0; position: relative
   transition: transform .55s var(--ease), box-shadow .35s, opacity .35s;
 }
 .pcard.out { opacity: 0; pointer-events: none; }
+.pcard.tier-1, .pcard.tier-1 .tab { background: var(--zhu); border-color: var(--zhu); color: #fff; }
+.pcard.tier-1 .tab, .pcard.tier-1 .tab b, .pcard.tier-1 .cap p { color: #f7e3dc; }
+.pcard.tier-1 .open { background: #fff; color: var(--zhu); }
+.pcard.tier-2, .pcard.tier-2 .tab { background: #f2ddd4; border-color: #e3bfb2; }
+.pcard.tier-2 .cap p { color: #8a5a4c; }
 .pcard.hot { box-shadow: 0 40px 60px -30px rgba(35,31,28,.55); }
 .pcard .tab { position: absolute; top: -26px; left: 18px; height: 27px; padding: 0 12px; display: flex; align-items: center; gap: 8px; background: var(--paper-3); border: 1px solid var(--rule); border-bottom: 0; border-radius: 6px 6px 0 0; font: 500 12px var(--mono); color: var(--ink-3); white-space: nowrap; }
 .pcard .tab b { color: var(--zhu); font-weight: 500; }

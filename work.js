@@ -44,8 +44,8 @@
         'Biblely turns scripture reading into real understanding through plain-language explanations, guided reflection and community connection — so people engage with each chapter instead of just getting through it.',
         "It's designed bilingual from the start, to make faith accessible across languages and cultures."
       ],
-      meta: [['Role', 'UX · App design'], ['Format', 'Live interactive prototype']],
-      links: [['Open the prototype', 'https://y65zhu.github.io/Biblely/']],
+      meta: [['Role', 'Product · UX · App design'], ['Format', 'Product brief + live prototype']],
+      links: [['Read the product brief', 'biblely-brief.html'], ['Open the prototype', 'https://y65zhu.github.io/Biblely/']],
       media: [{ iframe: 'https://y65zhu.github.io/Biblely/', ar: '9/16', cap: 'Live prototype — scroll and tap inside' }]
     },
     {
@@ -204,7 +204,9 @@
     : `<div class="type-cover"><div><span>${p.type[0]}</span><small>${p.type[1]}</small></div></div>`;
   PROJECTS.forEach((p, i) => {
     const b = document.createElement('button');
-    b.className = 'pcard';
+    // key work stands out: tier 1 in full vermilion, tier 2 in a lighter tint
+    const TIER = { dofocus: 1, biblely: 1, brochure: 2, excel: 2 };
+    b.className = 'pcard' + (TIER[p.id] ? ` tier-${TIER[p.id]}` : '');
     b.dataset.id = p.id;
     b.setAttribute('aria-label', `${p.title} — open project`);
     b.innerHTML = `

@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Biblely Product Brief · Annora Zhu</title>
+  <meta name="description" content="Product brief for Biblely, a bilingual Bible app that explains scripture verse by verse: research, personas, competitors, RICE prioritization, roadmap and metrics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preload" href="danxingshu-subset.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=202611030125">
+  <link rel="stylesheet" href="case.css?v=202611030125">
+  <style>
+    .cs-hero figure.one { grid-template-columns: 1fr; max-width: 300px; justify-self: end; }
+    .cs-hero figure.one img { aspect-ratio: 575/900; }
+    .persona { display: grid; gap: 14px; }
+    .persona h3 { font-size: clamp(26px, 2.4vw, 32px); }
+    .persona dl { display: grid; grid-template-columns: 90px 1fr; gap: 8px 14px; font: 300 15px/1.5 var(--sans); color: var(--ink-2); }
+    .persona dt { font: 500 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); padding-top: 3px; }
+    .persona blockquote { margin: 0; padding-left: 14px; border-left: 2px solid var(--zhu); font: italic 400 18px/1.45 var(--display); color: var(--ink); }
+    .cs tr.cut td { border-top: 2px solid var(--ink); }
+    @media (max-width: 900px) { .cs-hero figure.one { justify-self: start; } .persona dl { grid-template-columns: 76px 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="index.html"><span class="dx">朱</span><span class="name-en">Annora Zhu</span></a>
+  <ul class="tabs">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html" aria-current="page">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="lens.html">Lens</a></li>
+  </ul>
+  <a class="btn" href="#hello">Say hi</a>
+</nav>
+
+<main class="cs">
+
+<section class="cs-hero">
+  <div>
+    <p class="mono eyebrow">Product brief · Biblely · personal project</p>
+    <h1>A pastor in your pocket, for people who'd rather <em>read alone</em>.</h1>
+    <p class="lead">Biblely explains scripture line by line, in plain words, in Chinese and English. I'm a Christian, and I built it for a problem I have myself. This brief covers what I learned, who it's for, what to build first, and how I'll know it works.</p>
+    <a class="link cs-back" href="work.html#biblely">← Back to the project</a>
+  </div>
+  <figure class="one">
+    <img src="biblely.jpg" alt="Biblely home screen with a Chinese and English language switch">
+  </figure>
+</section>
+
+<section style="padding-top:0">
+  <div class="cs-facts">
+    <div><strong>5</strong><span>reading modes, from Chinese-only to side-by-side bilingual</span></div>
+    <div><strong>8</strong><span>features scored with RICE to set the build order</span></div>
+    <div><strong>4</strong><span>of them make the first release; community waits</span></div>
+    <div><strong>2</strong><span>personas: the quiet learner and the first-time reader</span></div>
+  </div>
+</section>
+
+<!-- 01 research -->
+<section>
+  <p class="cs-num">01 · What I heard</p>
+  <h2>People don't stop reading because they stop believing.</h2>
+  <p class="cs-text">I interviewed my mom, a few friends from church, and myself. Most people in my church are Chinese, but the problem isn't Chinese-specific — people everywhere read the Bible, and they get stuck in the same places. Four findings came up again and again:</p>
+  <div class="cs-table-wrap">
+    <table>
+      <thead><tr><th>What I heard</th><th>What it means</th><th>Product answer</th></tr></thead>
+      <tbody>
+        <tr><td>“Every translation reads differently, and none of them are easy.”</td><td>The text itself is the first barrier — classical Chinese and old English both</td><td>Plain-language explanation under every verse</td></tr>
+        <tr><td>“There's no pastor to walk me through it line by line.”</td><td>Sunday sermons explain; reading alone at home doesn't</td><td>A “tutor” voice: chapter summary, key points, verse-by-verse notes</td></tr>
+        <tr><td>“Without a small group I don't keep going.”</td><td>Consistency comes from accountability, not willpower</td><td>Progress, streaks and a reflection at the end of each chapter</td></tr>
+        <tr><td>“I'd rather learn quietly on my own.”</td><td>Not everyone wants a group — and groups are what most apps push</td><td>Private by default; sharing is always a choice</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cs-quote">The job to be done: <em>“When I can't make it to Sunday service, help me understand today's passage as if someone were explaining it to me.”</em></p>
+</section>
+
+<!-- 02 personas -->
+<section>
+  <p class="cs-num">02 · Who it's for</p>
+  <h2>Two readers, one app.</h2>
+  <div class="cs-two">
+    <div class="cs-card persona">
+      <h4>Persona 1</h4>
+      <h3>The quiet learner</h3>
+      <dl>
+        <dt>Who</dt><dd>University student in Canada, Christian, reads in both Chinese and English</dd>
+        <dt>Context</dt><dd>Classes and work clash with Sunday service; prefers studying alone over group meetings</dd>
+        <dt>Needs</dt><dd>Someone to explain the passage without having to join anything; switch languages when a verse doesn't land</dd>
+        <dt>Frustration</dt><dd>Apps that are either a wall of text or a social feed</dd>
+      </dl>
+      <blockquote>“I want to understand it — I just don't want to do it in a room full of people.”</blockquote>
+    </div>
+    <div class="cs-card persona">
+      <h4>Persona 2</h4>
+      <h3>The first-time reader</h3>
+      <dl>
+        <dt>Who</dt><dd>Middle-aged or older, Chinese-first, without much formal higher education</dd>
+        <dt>Context</dt><dd>Reads at home, often on a phone a family member set up; small text is hard</dd>
+        <dt>Needs</dt><dd>Everyday words instead of theology; large type; the option to listen instead of read</dd>
+        <dt>Frustration</dt><dd>The Chinese Union Version's classical phrasing; feeling embarrassed to ask</dd>
+      </dl>
+      <blockquote>“I read every word and still don't know what it said.”</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- 03 competitors -->
+<section>
+  <p class="cs-num">03 · The market</p>
+  <h2>Plenty of Bibles. Nobody to explain them.</h2>
+  <p class="cs-text">The category splits in two. <strong>Library apps</strong> give you dozens of translations, audio and reading plans, but leave understanding to you. <strong>AI chat apps</strong> will explain, but in English only, as an open-ended conversation with no structure, and behind a subscription. None of them pair a plain-language explanation of every verse with true bilingual reading and a mode built for older eyes.</p>
+  <div class="cs-table-wrap">
+    <table>
+      <thead><tr><th>App</th><th>Rating</th><th>Ratings</th><th>Price</th><th>Explains verses?</th><th>Chinese / bilingual</th></tr></thead>
+      <tbody>
+        <tr><td>YouVersion Bible App</td><td class="n">4.9★</td><td class="n">14M</td><td class="n">Free</td><td>Plans, devotionals, videos — no line-by-line explanation</td><td>Chinese interface; no side-by-side reading described</td></tr>
+        <tr><td>Dwell</td><td class="n">4.9★</td><td class="n">79K</td><td class="n">$59.99 / yr</td><td>No — an audio Bible</td><td>Not described</td></tr>
+        <tr><td>WeDevote 微读圣经</td><td class="n">4.9★</td><td class="n">5.1K</td><td class="n">Free</td><td>Lexicon and devotionals, not plain-language notes</td><td>42 versions, Chinese-first</td></tr>
+        <tr><td>Bible Chat®</td><td class="n">4.7★</td><td class="n">1.2K</td><td class="n">$9.99–$59.99</td><td>Yes — AI coaching sessions</td><td>English only</td></tr>
+        <tr class="us"><td>Biblely</td><td class="n">—</td><td class="n">—</td><td class="n">Free; groups pay</td><td>Yes — every verse, plus summary and questions</td><td>5 modes incl. side-by-side and mixed</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cs-note">Source: US App Store, read 3 Nov 2026 —
+    <a href="https://apps.apple.com/us/app/bible/id282935706">YouVersion</a> ·
+    <a href="https://apps.apple.com/us/app/dwell-audio-bible/id1343917374">Dwell</a> ·
+    <a href="https://apps.apple.com/us/app/-/id654898456">WeDevote</a> ·
+    <a href="https://apps.apple.com/us/app/-/id6737005701">Bible Chat®</a>. Bible Chat® lists several plans without naming their terms, so its range is shown.</p>
+  <div class="cs-two">
+    <div class="cs-card">
+      <h4>Number of ratings — the incumbents are huge</h4>
+      <div class="bars">
+        <div class="bar hi"><span>YouVersion</span><i style="--w:100%"></i><b>14M</b></div>
+        <div class="bar"><span>Dwell</span><i style="--w:0.6%"></i><b>79K</b></div>
+        <div class="bar"><span>WeDevote</span><i style="--w:0.4%"></i><b>5.1K</b></div>
+        <div class="bar"><span>Bible Chat®</span><i style="--w:0.3%"></i><b>1.2K</b></div>
+      </div>
+      <p class="cs-note">Biblely can't out-library YouVersion, and shouldn't try. It wins on one job the giant doesn't do: explaining.</p>
+    </div>
+    <div class="cs-card map">
+      <h4>Positioning</h4>
+      <svg viewBox="0 0 420 300" role="img" aria-label="Positioning map: English-only versus bilingual on the horizontal axis, read on your own versus explained to you on the vertical axis. Biblely sits alone in the bilingual and explained corner.">
+        <line x1="210" y1="20" x2="210" y2="280" stroke="#d3c8b6"/><line x1="20" y1="150" x2="400" y2="150" stroke="#d3c8b6"/>
+        <text x="22" y="166" font-family="IBM Plex Mono" font-size="10" fill="#8f857a">ENGLISH ONLY</text>
+        <text x="398" y="166" font-family="IBM Plex Mono" font-size="10" fill="#8f857a" text-anchor="end">BILINGUAL</text>
+        <text x="216" y="30" font-family="IBM Plex Mono" font-size="10" fill="#8f857a">EXPLAINED TO YOU</text>
+        <text x="216" y="276" font-family="IBM Plex Mono" font-size="10" fill="#8f857a">READ ON YOUR OWN</text>
+        <g font-family="Inter" font-size="13" fill="#231f1c">
+          <circle cx="70" cy="70" r="6" fill="#8f857a"/><text x="80" y="74">Bible Chat®</text>
+          <circle cx="90" cy="236" r="6" fill="#8f857a"/><text x="100" y="240">Dwell</text>
+          <circle cx="250" cy="214" r="6" fill="#8f857a"/><text x="260" y="218">YouVersion</text>
+          <circle cx="330" cy="246" r="6" fill="#8f857a"/><text x="304" y="232">WeDevote</text>
+          <circle cx="330" cy="62" r="9" fill="#b23a2b"/><text x="344" y="66" fill="#b23a2b" font-weight="500">Biblely</text>
+        </g>
+      </svg>
+      <p class="cs-note">The top-right corner is empty: explained, and bilingual.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 prioritization -->
+<section>
+  <p class="cs-num">04 · What to build first</p>
+  <h2>Eight features. Four make the cut.</h2>
+  <p class="cs-text">The prototype shows the whole vision. To decide the build order, I scored each feature with RICE — <strong>Reach</strong> (of 10 readers, how many use it), <strong>Impact</strong> (1–3), <strong>Confidence</strong>, and <strong>Effort</strong> in person-weeks. Score = R × I × C ÷ E.</p>
+  <div class="cs-table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>Reach</th><th>Impact</th><th>Confidence</th><th>Effort</th><th>Score</th><th>Release</th></tr></thead>
+      <tbody>
+        <tr><td>Chapter summary + 3 key points</td><td class="n">8</td><td class="n">2</td><td class="n">80%</td><td class="n">1</td><td class="n"><b>12.8</b></td><td><span class="tag free">v1</span></td></tr>
+        <tr><td>Large text + read aloud</td><td class="n">4</td><td class="n">3</td><td class="n">80%</td><td class="n">1</td><td class="n"><b>9.6</b></td><td><span class="tag free">v1</span></td></tr>
+        <tr><td>Verse-by-verse explanation</td><td class="n">10</td><td class="n">3</td><td class="n">80%</td><td class="n">3</td><td class="n"><b>8.0</b></td><td><span class="tag free">v1</span></td></tr>
+        <tr><td>Five bilingual reading modes</td><td class="n">6</td><td class="n">2</td><td class="n">80%</td><td class="n">2</td><td class="n"><b>4.8</b></td><td><span class="tag free">v1</span></td></tr>
+        <tr class="cut"><td>Comprehension questions</td><td class="n">5</td><td class="n">1</td><td class="n">50%</td><td class="n">1</td><td class="n">2.5</td><td><span class="tag plan">v2</span></td></tr>
+        <tr><td>Ask about this verse</td><td class="n">5</td><td class="n">2</td><td class="n">50%</td><td class="n">5</td><td class="n">1.0</td><td><span class="tag plan">v2</span></td></tr>
+        <tr><td>Public community reflections</td><td class="n">3</td><td class="n">1</td><td class="n">50%</td><td class="n">4</td><td class="n">0.4</td><td><span class="tag">v3</span></td></tr>
+        <tr><td>Private church Circles</td><td class="n">2</td><td class="n">2</td><td class="n">50%</td><td class="n">8</td><td class="n">0.3</td><td><span class="tag plus">v3 · paid</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="cs-two">
+    <div class="cs-card">
+      <h4>RICE score</h4>
+      <div class="bars">
+        <div class="bar hi"><span>Summary</span><i style="--w:100%"></i><b>12.8</b></div>
+        <div class="bar hi"><span>Large text</span><i style="--w:75%"></i><b>9.6</b></div>
+        <div class="bar hi"><span>Explanations</span><i style="--w:62.5%"></i><b>8.0</b></div>
+        <div class="bar hi"><span>Bilingual</span><i style="--w:37.5%"></i><b>4.8</b></div>
+        <div class="bar"><span>Questions</span><i style="--w:19.5%"></i><b>2.5</b></div>
+        <div class="bar"><span>Ask</span><i style="--w:7.8%"></i><b>1.0</b></div>
+        <div class="bar"><span>Community</span><i style="--w:3.1%"></i><b>0.4</b></div>
+        <div class="bar"><span>Circles</span><i style="--w:2.3%"></i><b>0.3</b></div>
+      </div>
+    </div>
+    <div class="cs-card">
+      <h4>What the scores say</h4>
+      <p class="cs-text" style="margin-top:0;font-size:16px">Everything that helps one person <strong>understand</strong> scores high; everything <strong>social</strong> scores low. That matches the interviews — the quiet learner never asked for a feed. Large text and read-aloud rank second because they're cheap and decide whether the second persona can use the app at all.</p>
+      <p class="cs-text" style="font-size:16px">Community isn't cut — it moves to v3, when there are enough readers for it to feel alive instead of empty.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 roadmap + money -->
+<section>
+  <p class="cs-num">05 · Roadmap &amp; business model</p>
+  <h2>Free for the reader. Paid by the group.</h2>
+  <div class="cs-table-wrap">
+    <table>
+      <thead><tr><th>Release</th><th>Theme</th><th>Ships</th><th>Done when</th></tr></thead>
+      <tbody>
+        <tr><td>v1</td><td>Understand</td><td>Summary &amp; key points, verse explanations, bilingual modes, large text, read aloud</td><td>A first-time reader finishes a chapter and can say what it meant</td></tr>
+        <tr><td>v2</td><td>Reflect</td><td>Comprehension questions, private reflection journal, Ask about this verse</td><td>Readers come back to their saved reflections</td></tr>
+        <tr><td>v3</td><td>Together</td><td>Public reflections, private church Circles with leader notes, reading plans and prayer topics</td><td>A small group runs a 30-day plan inside the app</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cs-text">Reading stays free: YouVersion set that expectation years ago, and a paywall in front of scripture would turn away exactly the person who needs it most. The paid tier is <strong>Circles</strong> — a private space for a fellowship or small group, with leader notes, church reading plans and prayer topics — priced in the prototype at <strong>¥18 a month after a 7-day free trial</strong>. Group leaders have a reason and a budget; individual readers don't need to pay.</p>
+</section>
+
+<!-- 06 metrics + risks -->
+<section>
+  <p class="cs-num">06 · How I'll know it works</p>
+  <h2>Measure understanding, not just opens.</h2>
+  <div class="cs-table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>How it's counted</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Chapter completion</td><td>Readers who reach “chapter complete” ÷ readers who open a chapter</td><td>The core promise: getting through, not skipping</td></tr>
+        <tr><td>Understanding</td><td>Comprehension questions answered per finished chapter</td><td>Opens don't prove anyone understood anything</td></tr>
+        <tr><td>Consistency</td><td>Days read per week; share of readers with a 7-day streak</td><td>Replaces the small group as the thing that keeps people going</td></tr>
+        <tr><td>Reflection</td><td>Reflections saved per finished chapter (private and public)</td><td>Shows the reading landed somewhere personal</td></tr>
+        <tr><td>Circle conversion</td><td>Circles that stay paid after the 7-day trial</td><td>Whether the business model holds</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cs-table-wrap">
+    <table>
+      <thead><tr><th>Risk</th><th>Why it matters</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Theological accuracy</td><td>One wrong explanation costs the trust of a whole congregation</td><td>Explanations reviewed by pastors before release; sources shown under each note</td></tr>
+        <tr><td>AI answers in “Ask”</td><td>Open-ended AI can invent doctrine</td><td>Start with questions prepared for each passage, as the prototype does; open chat only with review</td></tr>
+        <tr><td>Translation licensing</td><td>Modern English translations such as the NIV need a licence to use in an app</td><td>Launch with public-domain texts (CUV, KJV/WEB), license others later</td></tr>
+        <tr><td>The name</td><td>Another developer already sells “Biblely Bible Chat” subscriptions on the App Store</td><td>Check trademarks and App Store names before launch; keep a backup name ready</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <a class="link cs-back" href="work.html#biblely">← Back to Biblely</a>
+</section>
+
+</main>
+
+<footer class="footer" id="hello">
+  <div class="stamp-zone" id="stampZone">
+    <p class="mono eyebrow">Say hi</p>
+    <h2>Have a product that needs a listener?</h2>
+    <div class="links">
+      <a href="mailto:y65zhu@uwaterloo.ca">y65zhu@uwaterloo.ca</a>
+      <a href="https://www.linkedin.com/in/annora-zhu-1355352b9">LinkedIn ↗</a>
+      <a href="https://www.instagram.com/zz_annora">Instagram ↗</a>
+    </div>
+    <figure class="signature">
+      <div class="sig-row"><span class="sig dx">朱硯潤</span><span class="sig-seal" data-seal="96"></span></div>
+      <figcaption><span class="mono sig-roman">ZHŪ YÀNRÙN</span><span class="sig-note">My name, signed and sealed — the way a painter finishes a painting.</span></figcaption>
+    </figure>
+    <p class="mono stamp-hint" id="stampHint">Click anywhere in here to leave your own seal.</p>
+  </div>
+  <div class="footer-ink" data-ink="ridge" data-seed="12" aria-hidden="true"></div>
+  <div class="fine mono"><span>© 2026 Annora Zhu</span><span>Hand-coded in Waterloo</span></div>
+</footer>
+
+<script src="main.js?v=202611030125"></script>
+<script src="ink.js?v=202611030125"></script>
+</body>
+</html>
