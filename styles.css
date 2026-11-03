@@ -325,7 +325,7 @@ section { padding: clamp(100px, 13vw, 170px) var(--gutter) 0; position: relative
 
 /* ================= LENS ================= */
 .hint { color: var(--ink-3); margin-top: 40px; }
-.table { position: relative; height: clamp(1100px, 112vw, 1440px); margin-top: 16px; }
+.table { position: relative; height: clamp(1260px, 128vw, 1660px); margin-top: 16px; }
 .stamp {
   --perf: 7px;
   position: absolute; left: var(--x); top: var(--y); width: var(--w);
