@@ -313,7 +313,9 @@
         // one or more photos ("a.jpg|b.jpg"); tap one to see it large
         const imgs = (f.dataset.img || '').split('|').filter(Boolean);
         winImgs.hidden = !imgs.length;
-        winImgs.style.setProperty('--n', imgs.length);
+        // up to three side by side; four or more go two by two
+        winImgs.style.setProperty('--n', imgs.length >= 4 ? 2 : imgs.length);
+        winImgs.classList.toggle('grid', imgs.length >= 4);
         winImgs.innerHTML = imgs.map(src => `<img src="${src}" alt="${f.dataset.title}">`).join('');
         $$('img', winImgs).forEach(im => im.addEventListener('click', () => site.lightbox(im.src, im.alt)));
         win.hidden = false;
