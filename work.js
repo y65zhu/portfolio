@@ -107,6 +107,34 @@
       media: [1, 2, 3, 4].map(i => ({ img: `brochure-${i}.jpg`, cap: `Page ${i}` }))
     },
     {
+      id: 'posters', cat: 'brand', title: 'Posters on the job', tab: 'Social & print',
+      kick: 'A clinic, an arcade, an au-pair program, an app launch.',
+      cover: 'poster-oriental.jpg',
+      body: [
+        "Most of my design work happens inside a job, on a deadline, for someone who has to sell something the next morning. This is a wall of it: treatment posters for a beauty clinic, an event poster for a VR arcade, a carousel for an au-pair exchange program, launch posters for an e-commerce app — plus a few studies in Chinese visual culture I made for myself.",
+        'Different audiences every time, same habit: work out who will stop scrolling, and what they need to read first.'
+      ],
+      meta: [['Role', 'Graphic design · Social media · Photography'], ['For', 'Past employers & myself']],
+      links: [],
+      media: [
+        { img: 'poster-oriental.jpg', cap: 'Oriental aesthetics — personal study' },
+        { img: 'poster-literary.jpg', cap: 'Literary Gathering — personal study' },
+        { img: 'poster-clinic-1.jpg', cap: 'Beauty clinic — treatment launch' },
+        { img: 'poster-clinic-2.jpg', cap: 'Beauty clinic — trial offer' },
+        { img: 'poster-clinic-3.jpg', cap: 'Beauty clinic — price list' },
+        { img: 'clinic-shoot-1.jpg', cap: 'Beauty clinic — photo shoot' },
+        { img: 'clinic-shoot-2.jpg', cap: 'Beauty clinic — photo shoot', wide: true },
+        { img: 'poster-arcade.jpg', cap: 'VR arcade — event poster' },
+        { img: 'poster-moonlight.jpg', cap: 'Whispers of Moonlight — personal study' },
+        { img: 'poster-nice-1.jpg', cap: 'Au-pair program — cover' },
+        { img: 'poster-nice-2.jpg', cap: 'Au-pair program — summer' },
+        { img: 'poster-nice-3.jpg', cap: 'Au-pair program — Carpa' },
+        { img: 'poster-nice-4.jpg', cap: 'Au-pair program — Dragone' },
+        { img: 'poster-alvins-1.jpg', cap: "E-commerce app — launch" },
+        { img: 'poster-alvins-2.jpg', cap: "E-commerce app — partner brands" }
+      ]
+    },
+    {
       id: 'antiques', cat: 'story', title: 'Antiques in Time', tab: 'Documentary',
       kick: 'A watchmaker, and the stories in the watches.',
       cover: 'antiques.jpg',
@@ -165,7 +193,7 @@
   const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
   // the newest work sits in the middle of the fan, DoFocus raised at rest
-  const ORDER = ['excel', 'waterlooworks', 'tryon', 'cantalk', 'biblely', 'dofocus', 'brochure', 'antiques', 'jane', 'forget'];
+  const ORDER = ['excel', 'waterlooworks', 'tryon', 'cantalk', 'biblely', 'dofocus', 'brochure', 'posters', 'antiques', 'jane', 'forget'];
   const rank = id => (ORDER.includes(id) ? ORDER.indexOf(id) : ORDER.length);
   PROJECTS.sort((a, b) => rank(a.id) - rank(b.id));
   const FEATURED = 'dofocus';
@@ -257,7 +285,8 @@
   cards.forEach(c => {
     c.addEventListener('focus', () => setHot(shown.indexOf(c)));
     c.addEventListener('click', () => {
-      const target = desktop.matches && active() >= 0 ? shown[active()] : c;
+      // the hovered card if there is one (a touch tap has none: use what was tapped)
+      const target = desktop.matches && hot >= 0 ? shown[hot] : c;
       open(target.dataset.id, target);
     });
   });

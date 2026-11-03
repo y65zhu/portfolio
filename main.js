@@ -304,14 +304,18 @@
   /* ---------- about: desk files open a little window ---------- */
   const win = $('#fileWindow');
   if (win) {
-    const winTitle = $('#winTitle'), winBody = $('#winBody'), winImg = $('#winImg');
+    const winTitle = $('#winTitle'), winBody = $('#winBody'), winImgs = $('#winImgs');
     $$('.file').forEach(f => site.draggable(f, {
       onTap: () => {
         $$('.file').forEach(o => o.classList.toggle('sel', o === f));
         winTitle.textContent = f.dataset.title;
         winBody.textContent = f.dataset.body;
-        winImg.hidden = !f.dataset.img;
-        if (f.dataset.img) { winImg.src = f.dataset.img; winImg.alt = f.dataset.title; }
+        // one or more photos ("a.jpg|b.jpg"); tap one to see it large
+        const imgs = (f.dataset.img || '').split('|').filter(Boolean);
+        winImgs.hidden = !imgs.length;
+        winImgs.style.setProperty('--n', imgs.length);
+        winImgs.innerHTML = imgs.map(src => `<img src="${src}" alt="${f.dataset.title}">`).join('');
+        $$('img', winImgs).forEach(im => im.addEventListener('click', () => site.lightbox(im.src, im.alt)));
         win.hidden = false;
         win.style.zIndex = ++zTop;
       }
