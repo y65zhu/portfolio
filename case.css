@@ -67,3 +67,9 @@
 .proto-phone.hinting .hot { background: rgba(178,58,43,.22); box-shadow: 0 0 0 2px rgba(178,58,43,.85); }
 .proto-cap { margin-top: 22px; text-align: center; color: var(--ink-3); min-height: 1.3em; }
 @media (max-width: 900px) { .proto { grid-template-columns: 1fr; } .proto-stage { order: -1; } }
+
+/* switch between two reads of the same project */
+.cs-switch { display: inline-flex; align-items: center; gap: 4px; margin: 0 0 22px; padding: 4px; border: 1px solid var(--rule); border-radius: 999px; background: var(--paper-3); }
+.cs-switch a { padding: 7px 14px; border-radius: 999px; font: 500 12px var(--mono); letter-spacing: .04em; color: var(--ink-2); transition: background .2s, color .2s; }
+.cs-switch a:hover { color: var(--ink); }
+.cs-switch a[aria-current="page"] { background: var(--ink); color: var(--paper); }

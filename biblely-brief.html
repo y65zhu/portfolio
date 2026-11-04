@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Biblely Product Brief · Annora Zhu</title>
-  <meta name="description" content="Product brief for Biblely, a bilingual Bible app that explains scripture verse by verse: end-to-end UX from research and personas to user flow, UI and a coded prototype, plus RICE prioritization, roadmap and metrics.">
+  <meta name="description" content="Product brief for Biblely, a bilingual Bible app that explains scripture verse by verse: research, personas, competitors, RICE prioritization, roadmap and metrics.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="preload" href="danxingshu-subset.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=202611041310">
-  <link rel="stylesheet" href="case.css?v=202611041310">
+  <link rel="stylesheet" href="styles.css?v=202611041420">
+  <link rel="stylesheet" href="case.css?v=202611041420">
   <style>
     .cs-hero figure.one { grid-template-columns: 1fr; max-width: 300px; justify-self: end; }
     .cs-hero figure.one img { aspect-ratio: 575/900; }
@@ -21,55 +21,6 @@
     .persona blockquote { margin: 0; padding-left: 14px; border-left: 2px solid var(--zhu); font: italic 400 18px/1.45 var(--display); color: var(--ink); }
     .cs tr.cut td { border-top: 2px solid var(--ink); }
     @media (max-width: 900px) { .cs-hero figure.one { justify-self: start; } .persona dl { grid-template-columns: 76px 1fr; } }
-    .cs-sub { margin-top: 64px; font-size: clamp(26px, 2.6vw, 34px); }
-    .process { margin-top: 36px; }
-    .process > p { font-size: 13px; color: var(--ink-2); letter-spacing: .04em; }
-    .process ol { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-    .process a { display: grid; gap: 4px; height: 100%; padding: 16px 18px; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper-3); position: relative; transition: border-color .2s; }
-    .process a:hover { border-color: var(--zhu); }
-    .process li:not(:last-child) a::after { content: "→"; position: absolute; right: -10px; top: 50%; transform: translate(50%, -50%); color: var(--ink-3); font-size: 14px; z-index: 1; }
-    .process span { font-size: 12px; color: var(--zhu); }
-    .process b { font: 400 22px/1.1 var(--display); }
-    .process em { font: 300 14px/1.4 var(--sans); font-style: normal; color: var(--ink-2); }
-    .flow { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; counter-reset: f; }
-    .flow li { position: relative; display: grid; align-content: start; gap: 6px; padding: 18px 16px 16px; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper-3); }
-    .flow li:not(:last-child)::after { content: "→"; position: absolute; right: -10px; top: 26px; transform: translateX(50%); color: var(--zhu); z-index: 1; }
-    .flow li > span { font-size: 12px; color: var(--ink-3); }
-    .flow b { font: 400 19px/1.2 var(--display); }
-    .flow em { font: 300 14px/1.4 var(--sans); font-style: normal; color: var(--ink-2); }
-    .flow i { justify-self: start; margin-top: 4px; font: 500 11px var(--mono); font-style: normal; color: var(--zhu); border: 1px solid var(--zhu); border-radius: 999px; padding: 1px 8px; }
-    .flow-side { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
-    .flow-side div { padding: 16px; border: 1px dashed var(--rule); border-radius: 6px; }
-    .flow-side .mono { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
-    .flow-side p { margin-top: 6px; font: 300 15px/1.45 var(--sans); color: var(--ink-2); }
-    .flow-side b { font-weight: 500; color: var(--ink); }
-    .screens { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3.4vw, 44px) clamp(18px, 2.4vw, 32px); margin-top: 40px; }
-    .screens figure { margin: 0; display: grid; gap: 18px; align-content: start; }
-    .screens img { width: 100%; max-width: 300px; aspect-ratio: 390/844; object-fit: cover; border-radius: 26px; border: 1px solid var(--rule); box-shadow: 0 30px 60px -36px rgba(35,31,28,.45); }
-    .screens .mono { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--zhu); }
-    .screens h3 { margin-top: 6px; font-size: clamp(22px, 2vw, 26px); }
-    .screens p { margin-top: 8px; font: 300 15px/1.55 var(--sans); color: var(--ink-2); }
-    .screens p b { font-weight: 500; color: var(--ink); }
-    .ds { margin-top: 48px; }
-    .ds-row { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center; }
-    .sw { display: flex; align-items: center; gap: 10px; font: 300 14px/1.35 var(--sans); color: var(--ink-2); }
-    .sw i { width: 40px; height: 40px; border-radius: 8px; flex: none; }
-    .sw code { font: 400 12px var(--mono); color: var(--ink-3); }
-    .ds-type { display: grid; gap: 4px; color: #1a2b4a; margin-left: auto; }
-    @media (max-width: 1000px) { .flow { grid-template-columns: repeat(3, 1fr); } .flow li:nth-child(3)::after { display: none; } }
-    @media (max-width: 900px) {
-      .process ol { grid-template-columns: 1fr 1fr; } .process li:nth-child(2n) a::after { display: none; }
-      .flow-side { grid-template-columns: 1fr; }
-      .screens { grid-template-columns: 1fr 1fr; }
-      .ds-type { margin-left: 0; }
-    }
-    @media (max-width: 560px) {
-      .flow { grid-template-columns: 1fr; } .flow li::after { display: none; }
-      .flow li:not(:last-child)::before { content: "↓"; position: absolute; left: 50%; bottom: -10px; transform: translate(-50%, 50%); color: var(--zhu); z-index: 1; background: var(--paper); padding: 0 4px; line-height: 1; }
-      .process li:last-child { grid-column: span 2; } .process a { padding: 12px 14px; } .process b { font-size: 19px; }
-      .flow li { padding: 14px 16px; gap: 4px; }
-      .screens { grid-template-columns: 1fr; } .screens img { max-width: 260px; }
-    }
   </style>
 </head>
 <body>
@@ -89,9 +40,10 @@
 
 <section class="cs-hero">
   <div>
+    <nav class="cs-switch" aria-label="Two ways to read this project"><a href="biblely-brief.html" aria-current="page">Product &amp; marketing</a><a href="biblely-ux.html">UX &amp; design</a></nav>
     <p class="mono eyebrow">Product brief · Biblely · personal project</p>
     <h1>A pastor in your pocket, for people who'd rather <em>read alone</em>.</h1>
-    <p class="lead">Biblely explains scripture line by line, in plain words, in Chinese and English. I'm a Christian, and I built it for a problem I have myself. I did every part myself, from the first interview to a prototype you can use below, and then planned how to ship it.</p>
+    <p class="lead">Biblely explains scripture line by line, in plain words, in Chinese and English. I'm a Christian, and I built it for a problem I have myself. This brief covers what I learned, who it's for, what to build first, and how I'll know it works.</p>
     <div class="d-links" style="margin-top:28px"><a class="pill" href="#prototype">Try the prototype ↓</a></div>
   </div>
   <figure class="one">
@@ -103,34 +55,39 @@
   <div class="cs-facts">
     <div><strong>5</strong><span>reading modes, from Chinese-only to side-by-side bilingual</span></div>
     <div><strong>8</strong><span>features scored with RICE to set the build order</span></div>
-    <div><strong>4</strong><span>interview findings, each traced to a screen</span></div>
+    <div><strong>4</strong><span>of them make the first release; community waits</span></div>
     <div><strong>2</strong><span>personas: the quiet learner and the first-time reader</span></div>
   </div>
-  <div class="process">
-    <p class="mono">My role · Solo — research, UX, UI, front-end prototype, product strategy</p>
-    <ol>
-      <li><a href="#research"><span class="mono">01–03</span><b>Research</b><em>Interviews, personas, market</em></a></li>
-      <li><a href="#flow"><span class="mono">04</span><b>Flow</b><em>Core path and app structure</em></a></li>
-      <li><a href="#screens"><span class="mono">05</span><b>UI</b><em>Screens and design system</em></a></li>
-      <li><a href="#prototype"><span class="mono">06</span><b>Prototype</b><em>Coded, clickable, testable</em></a></li>
-      <li><a href="#plan"><span class="mono">07–09</span><b>Plan</b><em>RICE, roadmap, metrics</em></a></li>
-    </ol>
+</section>
+
+<!-- prototype -->
+<section id="prototype">
+  <p class="cs-num">Try it · live prototype</p>
+  <h2>Read John 3 the way Biblely reads it.</h2>
+  <div class="proto">
+    <div class="proto-side">
+      <p class="cs-text" style="margin-top:0">This is the working prototype, not a screenshot. Scroll inside the phone: switch between 中文 and EN, open a chapter, read the plain-language note under each verse, reveal the comprehension questions, and try the text-size and reading-mode settings under 我的.</p>
+      <a class="link" href="https://y65zhu.github.io/Biblely/" target="_blank" rel="noopener">Open it full screen ↗</a>
+    </div>
+    <div class="proto-stage">
+      <div class="proto-phone"><iframe src="https://y65zhu.github.io/Biblely/" title="Biblely live prototype" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>
+    </div>
   </div>
 </section>
 
 <!-- 01 research -->
-<section id="research">
+<section>
   <p class="cs-num">01 · What I heard</p>
   <h2>People don't stop reading because they stop believing.</h2>
   <p class="cs-text">I interviewed my mom, a few friends from church, and myself. Most people in my church are Chinese, but the problem isn't Chinese-specific — people everywhere read the Bible, and they get stuck in the same places. Four findings came up again and again:</p>
   <div class="cs-table-wrap">
     <table>
-      <thead><tr><th>#</th><th>What I heard</th><th>What it means</th><th>Product answer</th></tr></thead>
+      <thead><tr><th>What I heard</th><th>What it means</th><th>Product answer</th></tr></thead>
       <tbody>
-        <tr><td class="n">F1</td><td>“Every translation reads differently, and none of them are easy.”</td><td>The text itself is the first barrier — classical Chinese and old English both</td><td>Plain-language explanation under every verse</td></tr>
-        <tr><td class="n">F2</td><td>“There's no pastor to walk me through it line by line.”</td><td>Sunday sermons explain; reading alone at home doesn't</td><td>A “tutor” voice: chapter summary, key points, verse-by-verse notes</td></tr>
-        <tr><td class="n">F3</td><td>“Without a small group I don't keep going.”</td><td>Consistency comes from accountability, not willpower</td><td>Progress, streaks and a reflection at the end of each chapter</td></tr>
-        <tr><td class="n">F4</td><td>“I'd rather learn quietly on my own.”</td><td>Not everyone wants a group — and groups are what most apps push</td><td>Private by default; sharing is always a choice</td></tr>
+        <tr><td>“Every translation reads differently, and none of them are easy.”</td><td>The text itself is the first barrier — classical Chinese and old English both</td><td>Plain-language explanation under every verse</td></tr>
+        <tr><td>“There's no pastor to walk me through it line by line.”</td><td>Sunday sermons explain; reading alone at home doesn't</td><td>A “tutor” voice: chapter summary, key points, verse-by-verse notes</td></tr>
+        <tr><td>“Without a small group I don't keep going.”</td><td>Consistency comes from accountability, not willpower</td><td>Progress, streaks and a reflection at the end of each chapter</td></tr>
+        <tr><td>“I'd rather learn quietly on my own.”</td><td>Not everyone wants a group — and groups are what most apps push</td><td>Private by default; sharing is always a choice</td></tr>
       </tbody>
     </table>
   </div>
@@ -221,102 +178,9 @@
   </div>
 </section>
 
-<!-- 04 flow + structure -->
-<section id="flow">
-  <p class="cs-num">04 · Flow &amp; structure</p>
-  <h2>From “I'm stuck” to “I get it”, without leaving the page.</h2>
-  <p class="cs-text">Before drawing a single screen I mapped the one path that matters: a reader opens the app alone and finishes a chapter understanding it. Every step answers one of the four findings (F1 to F4). Anything that isn't on this path — community, groups — lives in its own tab, so the reading never pushes anyone into a crowd.</p>
-  <ol class="flow">
-    <li><span class="mono">1</span><b>Open the app</b><em>Home resumes where you stopped — verse 15 of 36</em><i>F3</i></li>
-    <li><span class="mono">2</span><b>Chapter summary</b><em>What this chapter is about, in three key points</em><i>F2</i></li>
-    <li><span class="mono">3</span><b>Verse + plain note</b><em>An everyday-words explanation under every verse</em><i>F1</i></li>
-    <li><span class="mono">4</span><b>Comprehension questions</b><em>Try first, then reveal the answer</em><i>F2</i></li>
-    <li><span class="mono">5</span><b>Private reflection</b><em>Written for yourself; only you can see it</em><i>F4</i></li>
-    <li><span class="mono">6</span><b>Chapter complete</b><em>Progress and streak move forward</em><i>F3</i></li>
-  </ol>
-  <div class="flow-side">
-    <div><span class="mono">At step 3 · stuck on a verse?</span><p><b>Ask</b> opens questions prepared for that verse — guided, never an open chat.</p></div>
-    <div><span class="mono">Anywhere · hard to read?</span><p><b>Text size</b> up to Elder, <b>read aloud</b>, and five language modes.</p></div>
-    <div><span class="mono">After step 6 · only if you want</span><p><b>Share</b> a reflection publicly, or read with your group in <b>Circles</b>.</p></div>
-  </div>
-
-  <div class="cs-table-wrap">
-    <table>
-      <thead><tr><th>Tab</th><th>What's in it</th><th>Why it's a tab of its own</th></tr></thead>
-      <tbody>
-        <tr><td>Home</td><td>Continue reading, jump to any book and chapter, recent books</td><td>One tap back into the chapter — no decision about where to start (F3)</td></tr>
-        <tr><td>Read</td><td>Summary, verse-by-verse notes, questions, private reflection</td><td>The whole core path on one scrolling page, like a sermon you can pause (F1, F2)</td></tr>
-        <tr><td>Community</td><td>Today's reflection prompt and other readers' public reflections</td><td>Kept out of Read so the quiet learner never has to see it (F4)</td></tr>
-        <tr><td>Circles</td><td>Private church groups, shared reading plans, prayer topics</td><td>For readers who do want a group — and the paid tier (F3)</td></tr>
-        <tr><td>Profile</td><td>Language, reading mode, text size, read aloud, privacy</td><td>Set once by a family member, then forgotten (persona 2)</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- 05 screens -->
-<section id="screens">
-  <p class="cs-num">05 · Designing the screens</p>
-  <h2>Every screen answers something I heard.</h2>
-  <p class="cs-text">The visual language is calm on purpose: warm paper, deep navy, one gold accent. Scripture is set in a serif and the explanations in a plain sans, so a reader can always tell <strong>the text</strong> from <strong>the note about it</strong>. Six of the screens, and the decision behind each:</p>
-  <div class="screens">
-    <figure><img src="biblely-ui-home.jpg" alt="Biblely home screen: a large Continue Reading button, quick jumps to books, and the current chapter with a progress bar at verse 15 of 36" loading="lazy">
-      <figcaption><span class="mono">Home · F3</span><h3>Start where you left off</h3><p>The biggest thing on screen is <b>Continue Reading</b>. Without a group to keep you going, the app removes the first excuse: deciding where to begin.</p></figcaption></figure>
-    <figure><img src="biblely-ui-read.jpg" alt="Read screen for John chapter 3: a dark chapter summary card, then three numbered key points, then the first verse" loading="lazy">
-      <figcaption><span class="mono">Read · F2</span><h3>The summary comes first</h3><p>A pastor tells you what the passage is about before reading it. So does Biblely: a summary and three key points sit above verse 1.</p></figcaption></figure>
-    <figure><img src="biblely-ui-verse.jpg" alt="A verse in large serif type with an Understand note directly beneath it in a tinted block" loading="lazy">
-      <figcaption><span class="mono">Verse · F1</span><h3>The note is never a tap away</h3><p>Each verse is followed by its <b>Understand</b> note in a tinted block. No pop-ups, no footnote numbers — the explanation is simply the next thing you read.</p></figcaption></figure>
-    <figure><img src="biblely-ui-qa.jpg" alt="Comprehension questions with one answer revealed, and a private reflection box labelled only you can see this" loading="lazy">
-      <figcaption><span class="mono">Questions · F2 F4</span><h3>Think first, then check</h3><p>Answers stay hidden until you tap <b>Reveal</b>. The reflection box below says <b>only you can see this</b> — private by default.</p></figcaption></figure>
-    <figure><img src="biblely-ui-ask.jpg" alt="Ask about this verse sheet for John 3:1, listing four prepared questions to explore" loading="lazy">
-      <figcaption><span class="mono">Ask · risk</span><h3>Guided, not a chatbot</h3><p><b>Ask</b> opens questions prepared for that verse. An open AI chat could invent doctrine; prepared questions keep the help trustworthy.</p></figcaption></figure>
-    <figure><img src="biblely-ui-settings.jpg" alt="Profile settings: app language, five scripture reading modes with Bilingual Side-by-Side selected, and text size options Standard, Large and Elder" loading="lazy">
-      <figcaption><span class="mono">Profile · persona 2</span><h3>Built for older eyes</h3><p>Five reading modes, from Chinese-only to side-by-side, and a text size called <b>Elder</b> — named for who it's for, so it's easy to find.</p></figcaption></figure>
-  </div>
-  <div class="cs-card ds">
-    <h4>Design system</h4>
-    <div class="ds-row">
-      <div class="sw"><i style="background:#1a2b4a"></i><span>Deep navy<br><code>#1A2B4A</code></span></div>
-      <div class="sw"><i style="background:#c9a84c"></i><span>Soft gold<br><code>#C9A84C</code></span></div>
-      <div class="sw"><i style="background:#4a6fa5"></i><span>Sapphire<br><code>#4A6FA5</code></span></div>
-      <div class="sw"><i style="background:#faf8f4;box-shadow:inset 0 0 0 1px #e8e3da"></i><span>Warm white<br><code>#FAF8F4</code></span></div>
-      <div class="ds-type"><span style="font-family:Georgia,serif;font-size:22px">Scripture in Georgia</span><span style="font-family:-apple-system,'PingFang SC',sans-serif;font-size:15px">Notes and interface in the system sans · PingFang SC for Chinese</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- 06 prototype + test plan -->
-<section id="prototype">
-  <p class="cs-num">06 · Prototype</p>
-  <h2>Read John 3 the way Biblely reads it.</h2>
-  <div class="proto">
-    <div class="proto-side">
-      <p class="cs-text" style="margin-top:0">I built the prototype myself in HTML, CSS and JavaScript, so it behaves like the app instead of a set of linked pictures. Scroll inside the phone: switch between 中文 and EN, read the note under each verse, reveal the comprehension questions, open <b>Ask</b>, and try the text-size and reading-mode settings under Profile.</p>
-      <a class="link" href="https://y65zhu.github.io/Biblely/" target="_blank" rel="noopener">Open it full screen ↗</a>
-    </div>
-    <div class="proto-stage">
-      <div class="proto-phone"><iframe src="https://y65zhu.github.io/Biblely/" title="Biblely live prototype" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>
-    </div>
-  </div>
-  <h3 class="cs-sub">Usability test plan</h3>
-  <p class="cs-text">Five sessions per persona, on their own phones, thinking aloud. Each task checks one promise the design makes.</p>
-  <div class="cs-table-wrap">
-    <table>
-      <thead><tr><th>Task</th><th>Persona</th><th>Checks</th><th>Pass when</th></tr></thead>
-      <tbody>
-        <tr><td>Pick up yesterday's chapter</td><td>Both</td><td>Home resumes reading (F3)</td><td>Reaches the right verse in one tap, under 10 seconds</td></tr>
-        <tr><td>Explain John 3:3 in your own words</td><td>First-time reader</td><td>Plain notes are understood (F1)</td><td>Says what “born again” means without being prompted</td></tr>
-        <tr><td>Make the text easier to read</td><td>First-time reader</td><td>Elder size is findable</td><td>Finds and turns on Elder without help</td></tr>
-        <tr><td>Read in Chinese with English beside it</td><td>Quiet learner</td><td>Reading modes are clear</td><td>Chooses side-by-side on the first try</td></tr>
-        <tr><td>Write a note no one else can see</td><td>Quiet learner</td><td>Private by default (F4)</td><td>Trusts the note is private, and says why</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- 07 prioritization -->
-<section id="plan">
-  <p class="cs-num">07 · What to build first</p>
+<!-- 04 prioritization -->
+<section>
+  <p class="cs-num">04 · What to build first</p>
   <h2>Eight features. Four make the cut.</h2>
   <p class="cs-text">The prototype shows the whole vision. To decide the build order, I scored each feature with RICE — <strong>Reach</strong> (of 10 readers, how many use it), <strong>Impact</strong> (1–3), <strong>Confidence</strong>, and <strong>Effort</strong> in person-weeks. Score = R × I × C ÷ E.</p>
   <div class="cs-table-wrap">
@@ -356,9 +220,9 @@
   </div>
 </section>
 
-<!-- 08 roadmap + money -->
+<!-- 05 roadmap + money -->
 <section>
-  <p class="cs-num">08 · Roadmap &amp; business model</p>
+  <p class="cs-num">05 · Roadmap &amp; business model</p>
   <h2>Free for the reader. Paid by the group.</h2>
   <div class="cs-table-wrap">
     <table>
@@ -373,9 +237,9 @@
   <p class="cs-text">Reading stays free: YouVersion set that expectation years ago, and a paywall in front of scripture would turn away exactly the person who needs it most. The paid tier is <strong>Circles</strong> — a private space for a fellowship or small group, with leader notes, church reading plans and prayer topics — priced in the prototype at <strong>¥18 a month after a 7-day free trial</strong>. Group leaders have a reason and a budget; individual readers don't need to pay.</p>
 </section>
 
-<!-- 09 metrics + risks -->
+<!-- 06 metrics + risks -->
 <section>
-  <p class="cs-num">09 · How I'll know it works</p>
+  <p class="cs-num">06 · How I'll know it works</p>
   <h2>Measure understanding, not just opens.</h2>
   <div class="cs-table-wrap">
     <table>
@@ -401,7 +265,13 @@
       </tbody>
     </table>
   </div>
-  <a class="link cs-back" href="work.html">← All work</a>
+</section>
+
+<section class="cs-next">
+  <p class="cs-num">Next</p>
+  <h2>How the screens came out of the interviews.</h2>
+  <p class="cs-text">The design side of the same project — user flow, app structure, annotated screens, design system and a usability test plan — is in the UX case study.</p>
+  <div class="d-links" style="margin-top:24px"><a class="pill" href="biblely-ux.html">Read the UX case study →</a><a class="link" href="work.html" style="align-self:center;margin-left:18px">← All work</a></div>
 </section>
 
 </main>
@@ -427,7 +297,7 @@
   <div class="fine mono"><span>© 2026 Annora Zhu</span><span>Hand-coded in Waterloo</span></div>
 </footer>
 
-<script src="main.js?v=202611041310"></script>
-<script src="ink.js?v=202611041310"></script>
+<script src="main.js?v=202611041420"></script>
+<script src="ink.js?v=202611041420"></script>
 </body>
 </html>

@@ -45,7 +45,7 @@
         "It's designed bilingual from the start, to make faith accessible across languages and cultures."
       ],
       meta: [['Role', 'Product · UX · App design'], ['Format', 'Product brief + live prototype']],
-      links: [['Read the product brief', 'biblely-brief.html'], ['Open the prototype', 'https://y65zhu.github.io/Biblely/']],
+      links: [['Read the product brief', 'biblely-brief.html'], ['Read the UX case study', 'biblely-ux.html'], ['Open the prototype', 'https://y65zhu.github.io/Biblely/']],
       media: [{ iframe: 'https://y65zhu.github.io/Biblely/', ar: '9/16', cap: 'Live prototype — scroll and tap inside' }]
     },
     {
